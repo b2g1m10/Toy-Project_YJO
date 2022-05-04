@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;500;700&display=swap');
+
+/* COMMON */
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+.slide {
+  width: 375px;
+  height: 812px;
+  background-color: #eeece5;
+  margin: 50px auto 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.iphone {
+  background-image: url('./images/iphone.png');
+  width: 100%;
+  height: 44px;
+  background-size: cover;
+}
+
+/* HEADER */
+#header {
+  height: 43px;
+  width: 327px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#header .header__avatar {
+  background-image: url('./images/avatar01.svg');
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+}
+#header .header_title {
+  font-weight: 500;
+  font-size: 18px;
+}
+#header .header__icon-wrap {
+  width: 66px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+#header .header__icon-wrap .icon1 {
+  background-image: url('./images/icon-qr.svg');
+  width: 24px;
+  height: 21px;
+  display: block;
+  cursor: pointer;
+}
+#header .header__icon-wrap .icon2 {
+  background-image: url('./images/icon-search.svg');
+  width: 24px;
+  height: 24px;
+  display: block;
+  cursor: pointer;
+}
+/* ACCOUNT_STATUS */
+#account-status {
+  background-color: #fff;
+  width: 279px;
+  height: 155px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 16px rgba(226, 191, 66, 0.19);
+  margin-top: 33px;
+  text-align: center;
+}
+#account-status .bank-account {
+  text-align: center;
+  position: relative;
+  height: 21px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#account-status .bank-account .account {
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  color: #858585;
+  letter-spacing: -0.24px;
+}
+#account-status .bank-account .transfer {
+  position: absolute;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: -0.24px;
+  right: 16px;
+}
+
+#account-status .bank-amount {
+  margin-top: 16px;
+  height: 36px;
+}
+
+#account-status .bank-amount .total-amount a {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+#account-status .graph-wrap {
+  margin-top: 16px;
+  position: relative;
+}
+#account-status .graph-wrap .graph {
+  width: 202px;
+  height: 17px;
+  background-color: aqua;
+  margin: 0 auto;
+}
+#account-status .graph-wrap .graph-btn {
+  background-image: url('./images/btn-graph.png');
+  width: 14px;
+  height: 14px;
+  background-size: cover;
+  position: absolute;
+  right: 14px;
+  top: 0;
+  margin: auto 0;
+  cursor: pointer;
+}
+#account-status .balance-amount {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #858585;
+}
+
+/* AD */
+.ad-text {
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 24px;
+}
+.ad-text strong {
+  text-decoration: underline;
+  margin-left: 6px;
+}
+
+/* History */
+#history-wrap {
+  background-color: #f5f5f5;
+  box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
+  border-radius: 30px 30px 0px 0px;
+  width: 100%;
+  margin-top: 21px;
+  text-align: center;
+}
+#history-wrap .drag-btn {
+  width: 48px;
+  height: 2px;
+  border-radius: 4px;
+  background-color: #c4c4c4;
+  margin-top: 4px;
+  display: inline-block;
+}
+#history-wrap .goal-wrap {
+  width: 308px;
+  height: 49px;
+  background-color: #c4c4c4;
+  margin: 16.5px auto 0;
+}
+
+#history-wrap .day-use {
+  width: 302px;
+  margin: 17px auto 0;
+}
+#history-wrap .day-use .day-use__wrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+#history-wrap .day-use .day-use__wrap .day {
+  text-align: left;
+  font-weight: 700;
+}
+#history-wrap .day-use .day-use__wrap .use {
+  font-weight: 400;
+  text-align: right;
+  color: #b4b4b4;
+}
+#history-wrap .day-use .history {
+}
+#history-wrap .day-use .history .history_list {
+  display: flex;
+  justify-content: space-between;
+}
+#history-wrap .day-use .history .history_list .item {
+}
+#history-wrap .day-use .history .history_list .price {
+}
