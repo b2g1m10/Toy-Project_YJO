@@ -91,28 +91,37 @@ async function getData() {
 */
 
 function insertTxt(data) {
-  console.log(data)
+  console.log(data[0].date)
+  let totalPrice = 0
 
-  const day = document.createElement('h3')
-  day.classList.add('day')
   const daySpend = document.createElement('h3')
   daySpend.classList.add('day-spend')
-  const liHistory = document.createElement('li')
-  liHistory.classList.add('history_list')
-  const historyItem = document.createElement('h3')
-  historyItem.classList.add('item')
-  const historyPrice = document.createElement('h3')
-  historyPrice.classList.add('price')
 
   for (let i = 0; i < data.length; i++) {
+    const liHistory = document.createElement('li')
+    liHistory.classList.add('history_list')
+    const historyItem = document.createElement('h3')
+    historyItem.classList.add('item')
+    const historyPrice = document.createElement('h3')
+    historyPrice.classList.add('price')
+
     if (data[i].date === '2021.9.1') {
-      day.textContent = '오늘'
       historyItem.textContent = data[i].item
       historyPrice.textContent = data[i].price
-      dayUseWrap.appendChild(day)
+      totalPrice = totalPrice + data[i].price
+      console.log(totalPrice)
+
+      liHistory.appendChild(historyItem)
+      liHistory.appendChild(historyPrice)
+      history.appendChild(liHistory)
+    } else {
+      historyItem.textContent = data[i].item
+      historyPrice.textContent = data[i].price
       liHistory.appendChild(historyItem)
       liHistory.appendChild(historyPrice)
       history.appendChild(liHistory)
     }
   }
+  daySpend.textContent = `${totalPrice}원 지출`
+  dayUseWrap.appendChild(daySpend)
 }
