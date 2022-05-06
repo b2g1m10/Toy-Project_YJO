@@ -248,7 +248,7 @@ a {
 .ad-text {
   font-size: 1.4rem;
   cursor: pointer;
-  margin-top: 24px;
+  padding: 24px 0;
 }
 .ad-text a {
   text-decoration: underline;
