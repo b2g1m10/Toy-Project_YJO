@@ -14,32 +14,35 @@ async function getData() {
 
   labels = []
   values = []
+  averageVal = []
+  sum = 0
   for (i = 0; i < length; i++) {
     labels.push(data[i].date)
     values.push(data[i].price)
+    averageVal.push((sum = sum + data[i].price) / length)
   }
 
   // Daily-canvas
   new Chart(document.getElementById('daily-canvas'), {
-    type: 'bar',
     data: {
       labels: labels,
       datasets: [
         {
+          type: 'line',
+          label: '평균 지출',
+          backgroundColor: ['#CD5C5C'],
+          data: averageVal,
+          borderColor: ['#CD5C5C'],
+        },
+        {
+          type: 'bar',
           label: '일간리포트',
-          backgroundColor: [
-            '#3e95cd',
-            '#8e5ea2',
-            '#3cba9f',
-            '#e8c3b9',
-            '#c45850',
-            '#CD5C5C',
-            '#40E0D0',
-          ],
+          backgroundColor: ['#3cba9f'],
           data: values,
         },
       ],
     },
+
     options: {
       legend: { display: false },
       title: {

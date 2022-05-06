@@ -19,7 +19,7 @@ dragArea.addEventListener('mousedown', (e) => {
 
   window.addEventListener(
     'mouseup',
-    function () {
+    () => {
       dragArea.removeEventListener('mousemove', dragIt, false)
     },
     false
@@ -41,8 +41,6 @@ function checkboundary() {
     historyWrap.style.top = `${adOuter.bottom - 50}px`
   }
   // console.log(adOuter)
-  // console.log('header-top', outer.top)
-  // console.log('header-bottom', outer.bottom)
   // console.log('history-bottom', historyInner.bottom)
   // console.log('historyinner-top', historyWrap.style.top)
 }
@@ -53,11 +51,6 @@ function checkboundary() {
 //   item.addEventListener('touchstart', (e) => {
 //     console.log(e.changedTouches[0])
 //   })
-// })
-// Swiper js
-// var sectionSwiper = new Swiper('.my-swiper', {
-//   observer: true, // 추가
-//   observeParents: true, // 추가
 // })
 
 // PopUp
