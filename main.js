@@ -1,3 +1,4 @@
+// DragBtn
 const historyWrap = document.querySelectorAll('#history-wrap')
 const dragArea = document.querySelector('.drag-area')
 
