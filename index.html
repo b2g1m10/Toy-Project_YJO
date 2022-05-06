@@ -13,8 +13,10 @@
     <link rel="stylesheet" href="style.css">
     <!-- Swiper -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
+    <!-- Chart JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./main.js" defer></script>
+    <script src="./chart.js" defer></script>
 
   </head>
 
@@ -51,7 +53,7 @@
           </article>
 
           <!-- 지출관리 그래프 -->
-          <div class="account-chart hide display-none">
+          <div class="account-chart ">
             <button class="chart-close">닫기</button>
             <h2 class="chart__title">지출 관리</h2>
             <div class="setting-money-graph">
@@ -59,17 +61,23 @@
                 <h3>기준금액설정</h3>
                 <h2>2,100,000원</h2>
               </div>
-              <div class="setting-graph">graph</div>
+              <div class="setting-graph">
+                <canvas id="setting-canvas">graph</canvas>
+              </div>
             </div>
 
             <div class="daily-report">
               <h3 class="daily-title">일간 리포트</h3>
-              <div class="daily-graph">graph</div>
+              <div class="daily-graph">
+                <canvas id="daily-canvas"></canvas>
+              </div>
             </div>
 
             <div class="month-report">
               <h3 class="month-title">6월 지출 패턴</h3>
-              <div class="month-graph">graph</div>
+              <div class="month-graph">
+                <canvas id="month-canvas"></canvas>
+              </div>
             </div>
           </div>
           <!-- 광고 -->

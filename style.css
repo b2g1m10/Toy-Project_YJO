@@ -227,7 +227,6 @@ a {
   font-size: 18px;
 }
 .account-chart .daily-report .daily-graph {
-  background-color: #00bdb2;
   margin-top: 17px;
   width: 347px;
   height: 198px;
@@ -244,7 +243,6 @@ a {
   height: 308px;
   margin-left: 6px;
   margin-top: 18px;
-  background-color: #00bdb2;
 }
 /* AD */
 .ad-text {
