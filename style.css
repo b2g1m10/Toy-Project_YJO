@@ -40,12 +40,16 @@ a {
   height: 44px;
   background-size: cover;
   flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 /* HEADER */
 #header {
   height: 43px;
   width: 327px;
-  margin-top: 12px;
+  margin-top: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,7 +142,7 @@ a {
   margin: 0 auto;
 }
 #account-status .graph-wrap .graph-btn {
-  background-image: url('./images/btn-graph.png');
+  background-image: url('./images/btn-graph.svg');
   width: 14px;
   height: 14px;
   background-size: cover;
@@ -155,7 +159,93 @@ a {
   font-size: 1.4rem;
   color: #858585;
 }
+/* Account chart */
+.account-chart {
+  position: absolute;
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  padding-left: 30px;
+  box-sizing: border-box;
+  color: #444444;
+  transition: all 0.3s;
+}
+.hide {
+  height: 0;
+  opacity: 0;
+}
+.display-none {
+  display: none;
+}
 
+.account-chart .chart-close {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: -0.24px;
+  position: absolute;
+  top: 44px;
+  right: 13px;
+}
+.account-chart .chart__title {
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.24px;
+  margin-top: 77px;
+}
+.account-chart .setting-money-graph {
+  margin-top: 33px;
+  display: flex;
+  flex-direction: column;
+}
+.account-chart .setting-money-graph .setting-money {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.account-chart .setting-money-graph .setting-money h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.account-chart .setting-money-graph .setting-money h2 {
+  color: #ff5f00;
+  font-size: 24px;
+  text-align: right;
+  margin-right: 40px;
+}
+.account-chart .setting-money-graph .setting-graph {
+  margin-top: 23px;
+  width: 308px;
+  height: 28px;
+  background-color: #00bdb2;
+}
+.account-chart .daily-report {
+  margin-top: 59px;
+  font-weight: 500;
+}
+.account-chart .daily-report .daily-title {
+  font-size: 18px;
+}
+.account-chart .daily-report .daily-graph {
+  background-color: #00bdb2;
+  margin-top: 17px;
+  width: 347px;
+  height: 198px;
+}
+.account-chart .month-report {
+  margin-top: 46px;
+}
+.account-chart .month-report .month-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+.account-chart .month-report .month-graph {
+  width: 307px;
+  height: 308px;
+  margin-left: 6px;
+  margin-top: 18px;
+  background-color: #00bdb2;
+}
 /* AD */
 .ad-text {
   font-size: 1.4rem;
@@ -173,10 +263,10 @@ a {
   box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
   border-radius: 30px 30px 0px 0px;
   width: 100%;
+  /* top: 99px; */
   top: 309px;
   text-align: center;
   font-size: 1.4rem;
-  overflow: hidden;
   position: absolute;
 }
 #history-wrap .drag-area {
@@ -233,7 +323,7 @@ a {
 #history-wrap .goal-wrap .goal-btn:nth-child(2) .color-box {
   background-color: #feb700;
 }
-#history-wrap .goal-wrap .goal-btn .color-box span {
+#history-wrap .goal-wrap .goal-btn .color-box h3 {
   margin-left: 13px;
   margin-top: 7px;
 }
@@ -241,6 +331,7 @@ a {
 #history-wrap .day-money-wrap {
   width: 302px;
   margin: 17px auto 0;
+  /* overflow: scroll; */
 }
 #history-wrap .day-money-wrap .day-use__wrap {
   display: flex;
