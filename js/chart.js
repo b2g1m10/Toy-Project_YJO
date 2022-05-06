@@ -6,11 +6,11 @@ getData()
 
 async function getData() {
   const response = await fetch('https://eulsoo.github.io/list.json')
-  console.log(response)
+  // console.log(response)
   const data = await response.json()
-  console.log(data)
+  // console.log(data)
   length = data.length
-  console.log(length)
+  // console.log(length)
 
   labels = []
   values = []
@@ -91,7 +91,7 @@ async function getData() {
 */
 
 function insertTxt(data) {
-  console.log(data[0].date)
+  // console.log(data[0].date)
   let totalPrice = 0
 
   const daySpend = document.createElement('h3')
@@ -109,14 +109,15 @@ function insertTxt(data) {
       historyItem.textContent = data[i].item
       historyPrice.textContent = data[i].price
       totalPrice = totalPrice + data[i].price
-      console.log(totalPrice)
+      // console.log(totalPrice)
 
       liHistory.appendChild(historyItem)
       liHistory.appendChild(historyPrice)
       history.appendChild(liHistory)
-    } else {
+    } else if (data[i].date === '2021.9.2') {
       historyItem.textContent = data[i].item
       historyPrice.textContent = data[i].price
+      totalPrice = totalPrice + data[i].price
       liHistory.appendChild(historyItem)
       liHistory.appendChild(historyPrice)
       history.appendChild(liHistory)
