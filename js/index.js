@@ -15,9 +15,11 @@ let firstX
 // day-money
 const moneyWrap = document.querySelector('.day-money-wrap')
 const moneySlider = document.querySelector('.day-money-slider')
+const nav = document.querySelector('#nav')
 let moneyDown = false
 let moneyY
 let firstMoney
+// let moneyMove = false
 
 // historyWrap event
 dragArea.addEventListener('mousedown', (e) => {
@@ -112,16 +114,26 @@ const dragHistory = (e) => {
 const HisotryBoundary = () => {
   let moneyOuter = moneyWrap.getBoundingClientRect()
   let moneyInner = moneySlider.getBoundingClientRect()
-  console.log('moneyOuter-height', moneyOuter.height)
-  console.log('moneyOuter-bottom', moneyOuter.bottom)
-  console.log('moneyInner -height', moneyInner.height)
-  console.log('moneyInner -bottom', moneyInner.bottom)
+  // console.log('------------------ outer')
+  // console.log('moneyOuter-height', moneyOuter.height)
+  // console.log('moneyOuter-bottom', moneyOuter.bottom)
+  // console.log('moneyOuter -top', moneyOuter.top)
+  // console.log('------------------ inner')
+  // console.log('moneyInner -height', moneyInner.height)
+  // console.log('moneyInner -bottom', moneyInner.bottom)
+  // console.log('moneyInner -top', moneyInner.top)
+  // console.log(moneySlider.style.bottom)
+  let moneyOuterSum = -(moneyOuter.bottom - moneyOuter.height)
+  let innerSum = moneyOuter.height - moneyInner.height
+  // console.log(innerSum)
+  // console.log(moneyOuterSum + moneyInner.top)
   if (parseInt(moneySlider.style.top) >= 0) {
     moneySlider.style.top = `0px`
-  } else if (moneyInner.bottom <= moneyOuter.height) {
-    moneySlider.style.top = `${moneyInner.height - moneyOuter.height + 50}px`
+  } else if (moneyInner.bottom < moneyOuter.height) {
+    moneySlider.style.top = moneyOuterSum + innerSum + 'px'
   }
 }
+
 // PopUp
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
