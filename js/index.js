@@ -12,6 +12,46 @@ const goalSlider = document.querySelector('.goal-slider')
 let isLeft = false
 let initX
 let firstX
+// day-money
+const moneyWrap = document.querySelector('.day-money-wrap')
+const moneySlider = document.querySelector('.day-money-slider')
+let moneyDown = false
+let moneyY
+let firstMoney
+
+// historyWrap event
+dragArea.addEventListener('mousedown', (e) => {
+  e.preventDefault
+  isDown = true
+  initY = historyWrap.offsetTop
+  firstY = e.pageY
+  dragArea.style.cursor = 'grabbing'
+  dragArea.addEventListener('mousemove', dragIt, false)
+
+  window.addEventListener(
+    'mouseup',
+    () => {
+      dragArea.removeEventListener('mousemove', dragIt, false)
+    },
+    false
+  )
+})
+
+const dragIt = (e) => {
+  historyWrap.style.top = initY + e.pageY - firstY + 'px'
+
+  checkboundary()
+}
+const checkboundary = () => {
+  let headerOuter = header.getBoundingClientRect()
+  let historyInner = historyWrap.getBoundingClientRect()
+  let adOuter = adText.getBoundingClientRect()
+  if (historyInner.top <= headerOuter.bottom) {
+    historyWrap.style.top = `${headerOuter.top}px`
+  } else if (historyInner.top >= adOuter.bottom) {
+    historyWrap.style.top = `${adOuter.bottom - 50}px`
+  }
+}
 
 // goal Event
 goalWrap.addEventListener('mousedown', (e) => {
@@ -35,39 +75,6 @@ const dragLeft = (e) => {
   goalSlider.style.left = initX + e.pageX - firstX + 'px'
   checkGoalBoundary()
 }
-
-// historyWrap event
-dragArea.addEventListener('mousedown', (e) => {
-  e.preventDefault
-  isDown = true
-  initY = historyWrap.offsetTop
-  firstY = e.pageY
-  dragArea.style.cursor = 'grabbing'
-  dragArea.addEventListener('mousemove', dragIt, false)
-
-  window.addEventListener(
-    'mouseup',
-    () => {
-      dragArea.removeEventListener('mousemove', dragIt, false)
-    },
-    false
-  )
-})
-
-const dragIt = (e) => {
-  historyWrap.style.top = initY + e.pageY - firstY + 'px'
-  checkboundary()
-}
-const checkboundary = () => {
-  let headerOuter = header.getBoundingClientRect()
-  let historyInner = historyWrap.getBoundingClientRect()
-  let adOuter = adText.getBoundingClientRect()
-  if (historyInner.top <= headerOuter.bottom) {
-    historyWrap.style.top = `${headerOuter.top}px`
-  } else if (historyInner.top >= adOuter.bottom) {
-    historyWrap.style.top = `${adOuter.bottom - 50}px`
-  }
-}
 const checkGoalBoundary = () => {
   let goalWrapOuter = goalWrap.getBoundingClientRect()
   let goalSliderInner = goalSlider.getBoundingClientRect()
@@ -79,7 +86,42 @@ const checkGoalBoundary = () => {
     goalSlider.style.left = `0px`
   }
 }
+// day-money-drag
+moneyWrap.addEventListener('mousedown', (e) => {
+  e.preventDefault
+  moneyDown = true
+  moneyY = moneySlider.offsetTop
+  firstMoney = e.pageY
 
+  moneyWrap.style.cursor = 'grabbing'
+  moneyWrap.addEventListener('mousemove', dragHistory, false)
+  window.addEventListener(
+    'mouseup',
+    () => {
+      moneyWrap.removeEventListener('mousemove', dragHistory, false)
+    },
+    false
+  )
+})
+const dragHistory = (e) => {
+  // console.log(e)
+  moneySlider.style.top = moneyY + e.pageY - firstMoney + 'px'
+  HisotryBoundary()
+}
+
+const HisotryBoundary = () => {
+  let moneyOuter = moneyWrap.getBoundingClientRect()
+  let moneyInner = moneySlider.getBoundingClientRect()
+  console.log('moneyOuter-height', moneyOuter.height)
+  console.log('moneyOuter-bottom', moneyOuter.bottom)
+  console.log('moneyInner -height', moneyInner.height)
+  console.log('moneyInner -bottom', moneyInner.bottom)
+  if (parseInt(moneySlider.style.top) >= 0) {
+    moneySlider.style.top = `0px`
+  } else if (moneyInner.bottom <= moneyOuter.height) {
+    moneySlider.style.top = `${moneyInner.height - moneyOuter.height + 50}px`
+  }
+}
 // PopUp
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
