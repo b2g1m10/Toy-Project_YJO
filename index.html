@@ -51,39 +51,12 @@
             </div>
             <span class="balance-amount">5일 동안 210,000원 남음</span>
           </article>
-
-          <!-- PopUp 지출관리 그래프 -->
-          <div class="account-chart hide display-none">
-            <button class="chart-close">닫기</button>
-            <h2 class="chart__title">지출 관리</h2>
-            <div class="setting-money-graph">
-              <div class="setting-money">
-                <h3>기준금액설정</h3>
-                <h2>2,100,000원</h2>
-              </div>
-              <div class="setting-graph">
-                <canvas id="setting-canvas">graph</canvas>
-              </div>
-            </div>
-
-            <div class="daily-report">
-              <h3 class="daily-title">일간 리포트</h3>
-              <div class="daily-graph">
-                <canvas id="daily-canvas"></canvas>
-              </div>
-            </div>
-
-            <div class="month-report">
-              <h3 class="month-title">6월 지출 패턴</h3>
-              <div class="month-graph">
-                <canvas id="month-canvas"></canvas>
-              </div>
-            </div>
-          </div>
           <!-- 광고 -->
-          <h3 class="ad-text">지금 낮은 이자로 생활대출을 신청하세요!
+          <h3 class="middle--text">지금 낮은 이자로 생활대출을 신청하세요!
             <a href="javascript:void(0)">Go</a>
           </h3>
+
+
           <!-- 지출 내역 -->
           <article id="history-wrap">
             <div class="drag-area content">
@@ -163,6 +136,35 @@
               </li>
             </ul>
           </nav>
+
+          <!-- PopUp 지출관리 그래프 -->
+          <div class="account-chart hide display-none">
+            <button class="chart-close">닫기</button>
+            <h2 class="chart__title">지출 관리</h2>
+            <div class="setting-money-graph">
+              <div class="setting-money">
+                <h3>기준금액설정</h3>
+                <h2>2,100,000원</h2>
+              </div>
+              <div class="setting-graph">
+                <canvas id="setting-canvas">graph</canvas>
+              </div>
+            </div>
+
+            <div class="daily-report">
+              <h3 class="daily-title">일간 리포트</h3>
+              <div class="daily-graph">
+                <canvas id="daily-canvas"></canvas>
+              </div>
+            </div>
+
+            <div class="month-report">
+              <h3 class="month-title">6월 지출 패턴</h3>
+              <div class="month-graph">
+                <canvas id="month-canvas"></canvas>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- section 2 -->

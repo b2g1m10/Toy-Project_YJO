@@ -2,7 +2,7 @@
 const historyWrap = document.querySelector('#history-wrap')
 const dragArea = document.querySelector('.drag-area')
 const header = document.querySelector('#header')
-const adText = document.querySelector('.ad-text')
+const middleText = document.querySelector('.middle--text')
 let isDown = false
 let initY
 let firstY
@@ -41,13 +41,12 @@ dragArea.addEventListener('mousedown', (e) => {
 
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
-
   checkboundary()
 }
 const checkboundary = () => {
   let headerOuter = header.getBoundingClientRect()
   let historyInner = historyWrap.getBoundingClientRect()
-  let adOuter = adText.getBoundingClientRect()
+  let adOuter = middleText.getBoundingClientRect()
   if (historyInner.top <= headerOuter.bottom) {
     historyWrap.style.top = `${headerOuter.top}px`
   } else if (historyInner.top >= adOuter.bottom) {
@@ -157,5 +156,5 @@ const swiper = new Swiper('.my-swiper', {
   pagination: {
     el: '.swiper-pagination',
   },
-  touchRatio: 0.01,
+  touchRatio: 0.05,
 })
