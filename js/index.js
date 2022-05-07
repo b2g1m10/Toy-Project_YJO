@@ -114,15 +114,15 @@ const dragHistory = (e) => {
 const HisotryBoundary = () => {
   let moneyOuter = moneyWrap.getBoundingClientRect()
   let moneyInner = moneySlider.getBoundingClientRect()
-  // console.log('------------------ outer')
-  // console.log('moneyOuter-height', moneyOuter.height)
-  // console.log('moneyOuter-bottom', moneyOuter.bottom)
-  // console.log('moneyOuter -top', moneyOuter.top)
-  // console.log('------------------ inner')
-  // console.log('moneyInner -height', moneyInner.height)
-  // console.log('moneyInner -bottom', moneyInner.bottom)
-  // console.log('moneyInner -top', moneyInner.top)
-  // console.log(moneySlider.style.bottom)
+  console.log('------------------ outer')
+  console.log('moneyOuter-height', moneyOuter.height)
+  console.log('moneyOuter-bottom', moneyOuter.bottom)
+  console.log('moneyOuter -top', moneyOuter.top)
+  console.log('------------------ inner')
+  console.log('moneyInner -height', moneyInner.height)
+  console.log('moneyInner -bottom', moneyInner.bottom)
+  console.log('moneyInner -top', moneyInner.top)
+
   let moneyOuterSum = -(moneyOuter.bottom - moneyOuter.height)
   let innerSum = moneyOuter.height - moneyInner.height
   // console.log(innerSum)
@@ -147,4 +147,15 @@ closeBtn.addEventListener('click', () => {
 graphBtn.addEventListener('click', () => {
   account.classList.remove('hide')
   account.classList.remove('display-none')
+})
+
+// swiper js
+const swiper = new Swiper('.my-swiper', {
+  direction: 'horizontal',
+  touchStartPreventDefault: false,
+  preventClicks: false,
+  pagination: {
+    el: '.swiper-pagination',
+  },
+  touchRatio: 0.01,
 })
