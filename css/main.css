@@ -283,9 +283,11 @@ a {
 #history-wrap .goal-wrap {
   width: 308px;
   height: 47px;
-  margin: 0 auto 0;
+  top: 30px;
+  left: 30px;
   font-size: 1.2rem;
-  overflow-y: scroll;
+  overflow: hidden;
+  position: absolute;
 }
 #history-wrap .goal-wrap::-webkit-scrollbar {
   display: none;
@@ -295,6 +297,7 @@ a {
   /* background-color: #c4c4c4; */
   height: 100%;
   display: flex;
+  position: absolute;
 }
 #history-wrap .goal-wrap .goal-btn {
   width: 162px;
@@ -324,10 +327,26 @@ a {
   margin-left: 13px;
   margin-top: 7px;
 }
+#history-wrap .goal-wrap .add-moneybox {
+  display: flex;
+  align-items: center;
+}
+#history-wrap .goal-wrap .add-moneybox .add--btn {
+  width: 22.5px;
+  height: 22.5px;
+  margin-left: 19px;
+}
+#history-wrap .goal-wrap .add-moneybox .add--text {
+  color: #ff5f00;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 6px;
+  flex-shrink: 0;
+}
 /* day-money */
 #history-wrap .day-money-wrap {
   width: 302px;
-  margin: 17px auto 0;
+  margin: 89px auto 0;
   /* overflow: scroll; */
 }
 #history-wrap .day-money-wrap .day-use__wrap {
