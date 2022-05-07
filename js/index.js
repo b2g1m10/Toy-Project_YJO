@@ -125,8 +125,6 @@ const HisotryBoundary = () => {
 
   let moneyOuterSum = -(moneyOuter.bottom - moneyOuter.height)
   let innerSum = moneyOuter.height - moneyInner.height
-  // console.log(innerSum)
-  // console.log(moneyOuterSum + moneyInner.top)
   if (parseInt(moneySlider.style.top) >= 0) {
     moneySlider.style.top = `0px`
   } else if (moneyInner.bottom < moneyOuter.height) {
@@ -138,13 +136,15 @@ const HisotryBoundary = () => {
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
 const account = document.querySelector('.account-chart')
-closeBtn.addEventListener('click', () => {
+closeBtn.addEventListener('click', (e) => {
+  e.preventDefault
   account.classList.add('hide')
   setTimeout(() => {
     account.classList.add('display-none')
   }, 300)
 })
-graphBtn.addEventListener('click', () => {
+graphBtn.addEventListener('click', (e) => {
+  e.preventDefault
   account.classList.remove('hide')
   account.classList.remove('display-none')
 })

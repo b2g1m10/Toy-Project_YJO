@@ -1,0 +1,23 @@
+{
+  "name": "toy-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sacultang/Toy-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sacultang/Toy-Project/issues"
+  },
+  "homepage": "https://github.com/sacultang/Toy-Project#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
