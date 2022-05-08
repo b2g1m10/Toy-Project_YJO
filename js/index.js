@@ -3,37 +3,38 @@ const historyWrap = document.querySelector('#history-wrap')
 const dragArea = document.querySelector('.drag-area')
 const header = document.querySelector('#header')
 const middleText = document.querySelector('.middle--text')
-let isDown = false
-let initY
-let firstY
+let isDown = false,
+  initY,
+  firstY
 // goalBtn
 const goalWrap = document.querySelector('.goal-wrap')
 const goalSlider = document.querySelector('.goal-slider')
-let isLeft = false
-let initX
-let firstX
+let isLeft = false,
+  initX,
+  firstX
 // day-money
 const moneyWrap = document.querySelector('.day-money-wrap')
 const moneySlider = document.querySelector('.day-money-slider')
 const nav = document.querySelector('#nav')
-let moneyDown = false
-let moneyY
-let firstMoney
+let moneyDown = false,
+  moneyY,
+  firstMoney
 // let moneyMove = false
 
 // historyWrap event
 dragArea.addEventListener('mousedown', (e) => {
-  e.preventDefault
+  e.preventDefault()
   isDown = true
   initY = historyWrap.offsetTop
   firstY = e.pageY
-  dragArea.style.cursor = 'grabbing'
+  dragArea.style.cursor = 'grab'
   dragArea.addEventListener('mousemove', dragIt, false)
 
   window.addEventListener(
     'mouseup',
     () => {
       dragArea.removeEventListener('mousemove', dragIt, false)
+      dragArea.style.cursor = 'Default'
     },
     false
   )
@@ -41,6 +42,7 @@ dragArea.addEventListener('mousedown', (e) => {
 
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
+  dragArea.style.cursor = 'grabbbing'
   checkboundary()
 }
 const checkboundary = () => {
@@ -56,17 +58,18 @@ const checkboundary = () => {
 
 // goal Event
 goalWrap.addEventListener('mousedown', (e) => {
-  e.preventDefault
+  e.preventDefault()
   isLeft = true
   initX = goalSlider.offsetLeft
   firstX = e.pageX
 
-  goalWrap.style.cursor = 'grabbing'
+  goalWrap.style.cursor = 'grab'
   goalWrap.addEventListener('mousemove', dragLeft, false)
   window.addEventListener(
     'mouseup',
     () => {
       goalWrap.removeEventListener('mousemove', dragLeft, false)
+      goalWrap.style.cursor = 'Default'
     },
     false
   )
@@ -74,6 +77,7 @@ goalWrap.addEventListener('mousedown', (e) => {
 const dragLeft = (e) => {
   // console.log(e)
   goalSlider.style.left = initX + e.pageX - firstX + 'px'
+  goalWrap.style.cursor = 'grabbing'
   checkGoalBoundary()
 }
 const checkGoalBoundary = () => {
@@ -89,24 +93,27 @@ const checkGoalBoundary = () => {
 }
 // day-money-drag
 moneyWrap.addEventListener('mousedown', (e) => {
-  e.preventDefault
+  e.preventDefault()
   moneyDown = true
   moneyY = moneySlider.offsetTop
   firstMoney = e.pageY
 
-  moneyWrap.style.cursor = 'grabbing'
+  moneyWrap.style.cursor = 'grab'
   moneyWrap.addEventListener('mousemove', dragHistory, false)
   window.addEventListener(
     'mouseup',
     () => {
       moneyWrap.removeEventListener('mousemove', dragHistory, false)
+      moneyWrap.style.cursor = 'Default'
     },
     false
   )
 })
+
 const dragHistory = (e) => {
   // console.log(e)
   moneySlider.style.top = moneyY + e.pageY - firstMoney + 'px'
+  moneyWrap.style.cursor = 'grabbing'
   HisotryBoundary()
 }
 
@@ -134,20 +141,67 @@ const HisotryBoundary = () => {
 // PopUp
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
-const account = document.querySelector('.account-chart')
+const popup = document.querySelector('.popup-chart')
+const popupSlide = document.querySelector('.popup-slide')
+let popupInitY,
+  popupDown = false,
+  firstPopup
+
 closeBtn.addEventListener('click', (e) => {
-  e.preventDefault
-  account.classList.add('hide')
+  e.preventDefault()
+  popup.classList.add('hide')
   setTimeout(() => {
-    account.classList.add('display-none')
+    popup.classList.add('display-none')
   }, 300)
 })
 graphBtn.addEventListener('click', (e) => {
-  e.preventDefault
-  account.classList.remove('hide')
-  account.classList.remove('display-none')
+  e.preventDefault()
+  popup.classList.remove('hide')
+  popup.classList.remove('display-none')
+})
+// drag event
+
+popup.addEventListener('mousedown', (e) => {
+  e.preventDefault()
+  popupDown = true
+  firstPopup = e.pageY
+  popupInitY = popupSlide.offsetTop
+  popup.style.cursor = 'grab'
+  popup.addEventListener('mousemove', dragPopup, false)
 })
 
+popup.addEventListener('mouseup', (e) => {
+  popupDown = false
+  popup.style.cursor = 'Default'
+  // console.log(e)
+})
+const dragPopup = (e) => {
+  if (!popupDown) return
+  e.preventDefault()
+  popup.style.cursor = 'grabbing'
+  popupSlide.style.top = popupInitY + e.pageY - firstPopup + 'px'
+  popupBoundary()
+}
+const popupBoundary = () => {
+  let outerPopup = popup.getBoundingClientRect()
+  let innerPopup = popupSlide.getBoundingClientRect()
+  let navTop = nav.getBoundingClientRect()
+  console.log('outerPopup - height', outerPopup.height)
+  console.log('innerPopup', innerPopup.height)
+  console.log('outerPopup - bottom', outerPopup.bottom)
+  console.log('navtop - ', navTop.height)
+  // console.log(`${innerPopup.bottom}` - `${innerPopup.height}`)
+  if (parseInt(popupSlide.style.top) >= 0) {
+    popupSlide.style.top = '0px'
+  } else if (innerPopup.bottom < outerPopup.height - navTop.height) {
+    popupSlide.style.top =
+      `${outerPopup.height}` -
+      `${innerPopup.height}` -
+      `${navTop.height}` -
+      20 +
+      'px'
+  }
+}
 // swiper js
 const swiper = new Swiper('.my-swiper', {
   direction: 'horizontal',

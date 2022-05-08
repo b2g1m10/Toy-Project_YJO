@@ -159,8 +159,8 @@ a {
   font-size: 1.4rem;
   color: #858585;
 }
-/* Account chart */
-.account-chart {
+/* popup chart */
+.popup-chart {
   position: absolute;
   background-color: #fff;
   height: 100%;
@@ -178,8 +178,11 @@ a {
 .display-none {
   display: none;
 }
-
-.account-chart .chart-close {
+.popup-chart .popup-slide {
+  position: absolute;
+  top: 0;
+}
+.popup-chart .chart-close {
   font-size: 14px;
   font-weight: 300;
   letter-spacing: -0.24px;
@@ -187,58 +190,58 @@ a {
   top: 44px;
   right: 13px;
 }
-.account-chart .chart__title {
+.popup-chart .chart__title {
   font-weight: 500;
   font-size: 24px;
   letter-spacing: -0.24px;
   margin-top: 77px;
 }
-.account-chart .setting-money-graph {
+.popup-chart .setting-money-graph {
   margin-top: 33px;
   display: flex;
   flex-direction: column;
 }
-.account-chart .setting-money-graph .setting-money {
+.popup-chart .setting-money-graph .setting-money {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.account-chart .setting-money-graph .setting-money h3 {
+.popup-chart .setting-money-graph .setting-money h3 {
   font-size: 18px;
   font-weight: 500;
 }
-.account-chart .setting-money-graph .setting-money h2 {
+.popup-chart .setting-money-graph .setting-money h2 {
   color: #ff5f00;
   font-size: 24px;
   text-align: right;
   margin-right: 40px;
 }
-.account-chart .setting-money-graph .setting-graph {
+.popup-chart .setting-money-graph .setting-graph {
   margin-top: 23px;
   width: 308px;
   height: 28px;
   background-color: #00bdb2;
 }
-.account-chart .daily-report {
+.popup-chart .daily-report {
   margin-top: 59px;
   font-weight: 500;
 }
-.account-chart .daily-report .daily-title {
+.popup-chart .daily-report .daily-title {
   font-size: 18px;
 }
-.account-chart .daily-report .daily-graph {
+.popup-chart .daily-report .daily-graph {
   margin-top: 17px;
   width: 347px;
   height: 198px;
 }
-.account-chart .month-report {
+.popup-chart .month-report {
   margin-top: 46px;
 }
-.account-chart .month-report .month-title {
+.popup-chart .month-report .month-title {
   font-size: 18px;
   font-weight: 500;
 }
-.account-chart .month-report .month-graph {
+.popup-chart .month-report .month-graph {
   width: 307px;
   height: 308px;
   margin-left: 6px;

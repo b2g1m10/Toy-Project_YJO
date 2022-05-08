@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2021.9.1",
+    "inOut": "out",
+    "type": "shopping",
+    "item": "마우스",
+    "price": 80000
+  },
+  {
+    "date": "2021.9.1",
+    "inOut": "out",
+    "type": "eatout",
+    "item": "치킨공주",
+    "price": 20000
+  },
+  {
+    "date": "2021.9.1",
+    "inOut": "out",
+    "type": "transport",
+    "item": "택시",
+    "price": 5000
+  },
+  {
+    "date": "2021.9.1",
+    "inOut": "out",
+    "type": "shopping",
+    "item": "SSD",
+    "price": 200000
+  },
+  {
+    "date": "2021.9.1",
+    "inOut": "out",
+    "type": "eatout",
+    "item": "돈까스",
+    "price": 10000
+  }
+]
