@@ -147,7 +147,7 @@ a {
   width: 100%;
   height: 4px;
   margin: 0;
-  background-color: #858585;
+  background-color: #c4c4c4;
   border-radius: 10px;
 }
 #account-range::-webkit-slider-thumb {
@@ -411,17 +411,11 @@ a {
   display: none;
 }
 #history-wrap .day-money-wrap .day-money-slider {
-  /* width: 100%; */
-  /* position: absolute;
-  height: fit-content; */
+  /* min-height: 300px; */
   max-height: 300px;
+  padding-top: 20px;
 }
 #history-wrap .day-money-wrap .day-use__wrap {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 8px; */
-  /* overflow: scroll; */
   padding-bottom: 20px;
 }
 #history-wrap .day-money-wrap .day-use__wrap .day-total {

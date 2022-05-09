@@ -40,28 +40,40 @@ dragArea.addEventListener('mousedown', (e) => {
     false
   )
 })
-
+const section = document.querySelector('section')
+let initHeight = section.offsetHeight - 163
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
   dragArea.style.cursor = 'grabbbing'
+  // let sliderOuter = historyWrap.getBoundingClientRect()
+
+  // console.log('historyWrap.top', sliderOuter.top)
+  console.log('historyWrap', historyWrap.offsetTop)
+  // console.log('historyWrap.y', sliderOuter.y)
+  // console.log('historyWrap.', sliderOuter)
+  // console.log(e.pageY)
+
+  if (parseInt(historyWrap.style.top) < 349) {
+    moneySlider.style.maxHeight =
+      initHeight - parseInt(historyWrap.style.top) + 'px'
+  }
 
   checkboundary(e)
 }
-const checkboundary = (e) => {
+const checkboundary = () => {
   let headerOuter = header.getBoundingClientRect()
   let historyInner = historyWrap.getBoundingClientRect()
   let adOuter = middleText.getBoundingClientRect()
   let windowY = window.scrollY
   // console.log(windowY)
-  console.log('headerOuter.bottom', headerOuter.bottom)
-  console.log('headerOuter.top', headerOuter.top)
-  console.log('historyInner.top', historyInner.top)
-  // console.log(e.clientY)
-  // console.log(e)
+  // console.log('headerOuter.bottom', headerOuter.bottom)
+  // console.log('headerOuter.top', headerOuter.top)
+  // console.log('historyInner.top', historyInner.top)
+
   if (windowY > 0) {
     if (historyInner.top <= headerOuter.bottom) {
       historyWrap.style.top = `${headerOuter.top + windowY}px`
-      // moneySlider.style.maxHeight = '500px'
+      // moneySlider.style.maxHeight = '543px'
     } else if (historyInner.top >= adOuter.bottom) {
       historyWrap.style.top = `${adOuter.bottom + windowY - 50}px`
       // moneySlider.style.maxHeight = '300px'
@@ -69,7 +81,7 @@ const checkboundary = (e) => {
   } else {
     if (historyInner.top <= headerOuter.bottom) {
       historyWrap.style.top = `${headerOuter.top}px`
-      // moneySlider.style.maxHeight = '500px'
+      // moneySlider.style.maxHeight = '543px'
     } else if (historyInner.top >= adOuter.bottom) {
       historyWrap.style.top = `${adOuter.bottom - 50}px`
       // moneySlider.style.maxHeight = '300px'
