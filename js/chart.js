@@ -1,7 +1,10 @@
 // day-money
 const dayUseWrap = document.querySelector('.day-use__wrap')
 const history = document.querySelector('.history')
-
+const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
+let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
+gradient.addColorStop(0, 'rgba(0,189,178,1')
+gradient.addColorStop(1, 'rgba(17,242,229,0.1')
 getData()
 
 async function getData() {
@@ -14,40 +17,48 @@ async function getData() {
 
   labels = []
   values = []
+  label = []
   averageVal = []
   sum = 0
   for (i = 0; i < length; i++) {
+    label.push(data[i].item)
     labels.push(data[i].date)
     values.push(data[i].price)
     averageVal.push((sum = sum + data[i].price) / length)
   }
 
   // Daily-canvas
-  new Chart(document.getElementById('daily-canvas'), {
+  new Chart(dayilyCtx, {
     data: {
       labels: labels,
       datasets: [
         {
-          type: 'line',
-          label: '평균 지출',
-          backgroundColor: ['#CD5C5C'],
-          data: averageVal,
-          borderColor: ['#CD5C5C'],
-        },
-        {
           type: 'bar',
-          label: '일간리포트',
-          backgroundColor: ['#3cba9f'],
+          label: '일간 리포트',
+          backgroundColor: gradient,
           data: values,
+          hoverBackgroundColor: '#09837c',
+          PointStyle: 'dash',
         },
       ],
     },
 
     options: {
+      radius: 5,
       legend: { display: false },
       title: {
         display: true,
         text: '원',
+      },
+      responsive: true,
+      scales: {
+        // y: {
+        //   ticks: {
+        //     callback: function (val) {
+        //       return val + 'k'
+        //     },
+        //   },
+        // },
       },
     },
   })
@@ -56,7 +67,6 @@ async function getData() {
   new Chart(document.getElementById('month-canvas'), {
     type: 'doughnut',
     data: {
-      labels: labels,
       datasets: [
         {
           label: '6월 지출 패턴',

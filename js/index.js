@@ -129,7 +129,7 @@ const HisotryBoundary = () => {
   // console.log('moneyInner -bottom', moneyInner.bottom)
   // console.log('moneyInner -top', moneyInner.top)
 
-  let moneyOuterSum = -(moneyOuter.bottom - moneyOuter.height)
+  let moneyOuterSum = moneyOuter.height - moneyOuter.bottom
   let innerSum = moneyOuter.height - moneyInner.height
   if (parseInt(moneySlider.style.top) >= 0) {
     moneySlider.style.top = `0px`
@@ -158,6 +158,7 @@ graphBtn.addEventListener('click', (e) => {
   e.preventDefault()
   popup.classList.remove('hide')
   popup.classList.remove('display-none')
+  popupInit()
 })
 // drag event
 
@@ -175,9 +176,11 @@ popup.addEventListener('mouseup', (e) => {
   popup.style.cursor = 'Default'
   // console.log(e)
 })
+const popupInit = () => {
+  popupSlide.style.top = 0
+}
 const dragPopup = (e) => {
   if (!popupDown) return
-  e.preventDefault()
   popup.style.cursor = 'grabbing'
   popupSlide.style.top = popupInitY + e.pageY - firstPopup + 'px'
   popupBoundary()
@@ -186,20 +189,20 @@ const popupBoundary = () => {
   let outerPopup = popup.getBoundingClientRect()
   let innerPopup = popupSlide.getBoundingClientRect()
   let navTop = nav.getBoundingClientRect()
-  console.log('outerPopup - height', outerPopup.height)
-  console.log('innerPopup', innerPopup.height)
-  console.log('outerPopup - bottom', outerPopup.bottom)
-  console.log('navtop - ', navTop.height)
+  // console.log('outerPopup - height', outerPopup.height)
+  // console.log('outerPopup - bottom', outerPopup.bottom)
+  // console.log('innerPopup - height', innerPopup.height)
+  // console.log('innerPopup - bottom', innerPopup.bottom)
+  // console.log(innerSum)
+  // console.log(outerSum)
+  // console.log(navTop.height)
+
   // console.log(`${innerPopup.bottom}` - `${innerPopup.height}`)
   if (parseInt(popupSlide.style.top) >= 0) {
     popupSlide.style.top = '0px'
-  } else if (innerPopup.bottom < outerPopup.height - navTop.height) {
+  } else if (innerPopup.bottom + navTop.height < outerPopup.bottom) {
     popupSlide.style.top =
-      `${outerPopup.height}` -
-      `${innerPopup.height}` -
-      `${navTop.height}` -
-      20 +
-      'px'
+      outerPopup.height - innerPopup.height - navTop.height + 'px'
   }
 }
 // swiper js
