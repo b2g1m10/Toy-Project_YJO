@@ -247,6 +247,7 @@ a {
   margin-top: 23px;
   width: 308px;
   height: 28px;
+  position: relative;
 }
 .popup-chart .daily-report {
   margin-top: 59px;

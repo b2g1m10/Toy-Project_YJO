@@ -44,23 +44,36 @@ dragArea.addEventListener('mousedown', (e) => {
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
   dragArea.style.cursor = 'grabbbing'
+
   checkboundary(e)
 }
 const checkboundary = (e) => {
   let headerOuter = header.getBoundingClientRect()
   let historyInner = historyWrap.getBoundingClientRect()
   let adOuter = middleText.getBoundingClientRect()
-  console.log('adOuter.bottom', adOuter.bottom)
-  console.log('adOuter.top', adOuter)
+  let windowY = window.scrollY
+  // console.log(windowY)
+  console.log('headerOuter.bottom', headerOuter.bottom)
+  console.log('headerOuter.top', headerOuter.top)
   console.log('historyInner.top', historyInner.top)
-  console.log(e.clientY)
+  // console.log(e.clientY)
   // console.log(e)
-  if (historyInner.top <= headerOuter.bottom) {
-    historyWrap.style.top = `${headerOuter.top}px`
-    // moneySlider.style.maxHeight = '500px'
-  } else if (historyInner.top >= adOuter.bottom) {
-    historyWrap.style.top = `${adOuter.bottom - 50}px`
-    // moneySlider.style.maxHeight = '300px'
+  if (windowY > 0) {
+    if (historyInner.top <= headerOuter.bottom) {
+      historyWrap.style.top = `${headerOuter.top + windowY}px`
+      // moneySlider.style.maxHeight = '500px'
+    } else if (historyInner.top >= adOuter.bottom) {
+      historyWrap.style.top = `${adOuter.bottom + windowY - 50}px`
+      // moneySlider.style.maxHeight = '300px'
+    }
+  } else {
+    if (historyInner.top <= headerOuter.bottom) {
+      historyWrap.style.top = `${headerOuter.top}px`
+      // moneySlider.style.maxHeight = '500px'
+    } else if (historyInner.top >= adOuter.bottom) {
+      historyWrap.style.top = `${adOuter.bottom - 50}px`
+      // moneySlider.style.maxHeight = '300px'
+    }
   }
 }
 
