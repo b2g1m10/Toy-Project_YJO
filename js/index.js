@@ -225,22 +225,11 @@ const swiper = new Swiper('.my-swiper', {
 })
 
 // input range
-const changeRange = (e) => {
-  console.log('move')
-  const rangeBtn = document.querySelector('#account-range')
-  let value =
-    (rangeBtn.value - rangeBtn.getAttribute('min')) /
-    (rangeBtn.getAttribute('max') - rangeBtn.getAttribute('min'))
+const rangeBtn = document.querySelector('#account-range')
+const progressbar = document.querySelector('#progress__bar')
+rangeBtn.oninput = () => {
+  let value = rangeBtn.value
   console.log(value)
-  rangeBtn.style.backgroundImage =
-    '-webkit-gradient(linear, left top, right top, ' +
-    'color-stop(' +
-    value +
-    ', #ffdb4c),' +
-    'color-stop(' +
-    value +
-    ', #c4c4c4)' +
-    ' );'
-
-  console.log(rangeBtn.style.backgroundImage)
+  progressbar.style.width = value + '%'
+  // value.style.left = value / 2 + '%'
 }
