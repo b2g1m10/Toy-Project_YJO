@@ -218,7 +218,6 @@ const swiper = new Swiper('.my-swiper', {
 
 // input range
 const changeRange = (e) => {
-  e.stopPropagation()
   console.log('move')
   const rangeBtn = document.querySelector('#account-range')
   let value =

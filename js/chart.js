@@ -62,14 +62,21 @@ function insertTxt(data) {
     history.classList.add('history')
 
     for (let i = 0; i < value.length; i++) {
-      totalPrice = totalPrice + value[i].price
+      // console.log(value[i].inOut)
 
       const itemName = document.createElement('h3')
       itemName.classList.add('item')
       itemName.textContent = value[i].item
 
       const itemPrice = document.createElement('h3')
-      itemPrice.textContent = value[i].price + '원'
+      if (value[i].inOut === 'out') {
+        totalPrice = totalPrice + value[i].price
+        itemPrice.classList.add('price-out')
+        itemPrice.textContent = value[i].price + '원'
+      } else {
+        itemPrice.classList.add('price-in')
+        itemPrice.textContent = '+ ' + value[i].price + '원'
+      }
 
       const historyList = document.createElement('li')
       historyList.classList.add('history_list')

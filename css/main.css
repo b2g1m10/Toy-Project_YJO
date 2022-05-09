@@ -414,10 +414,20 @@ input[type='range']::-webkit-slider-thumb {
   box-sizing: border-box;
   margin-top: 18px;
 }
-#history-wrap .day-money-wrap .history .history_list:last-child {
+#history-wrap .day-money-wrap .day-use__wrap .history .history_list:last-child {
   margin-bottom: 38px;
 }
-
+#history-wrap .day-money-wrap .day-use__wrap .history .history_list .item {
+  color: #444;
+  font-weight: 400;
+}
+#history-wrap .day-money-wrap .day-use__wrap .history .history_list .price-in {
+  font-weight: 300;
+  color: #ff5f00;
+}
+#history-wrap .day-money-wrap .day-use__wrap .history .history_list .price-out {
+  font-weight: 300;
+}
 /* NAV */
 #nav {
   width: 100%;
