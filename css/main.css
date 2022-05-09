@@ -15,6 +15,7 @@ button {
 a {
   color: #000;
 }
+
 #content-wrapper {
   width: 375px;
   margin: 50px auto 0;
@@ -138,8 +139,31 @@ a {
 #account-status .graph-wrap .graph {
   width: 202px;
   height: 17px;
-  background-color: aqua;
   margin: 0 auto;
+}
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0.15, #ffdb4c),
+    color-stop(0.15, #c4c4c4)
+  );
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.122), 0 1px 3px rgba(0, 0, 0, 0.016);
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: #ff5f00;
+  height: 17px;
+  width: 8px;
+  border-radius: 4px;
+  border: solid 2px #fff;
 }
 #account-status .graph-wrap .graph-btn {
   background-image: url('../images/btn-graph.svg');
@@ -221,7 +245,6 @@ a {
   margin-top: 23px;
   width: 308px;
   height: 28px;
-  background-color: #00bdb2;
 }
 .popup-chart .daily-report {
   margin-top: 59px;
@@ -361,8 +384,13 @@ a {
 }
 #history-wrap .day-money-wrap .day-use__wrap {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 8px;
+}
+#history-wrap .day-money-wrap .day-use__wrap .day-total {
+  display: flex;
+  justify-content: space-between;
 }
 #history-wrap .day-money-wrap .day-use__wrap .day {
   text-align: left;
@@ -373,10 +401,10 @@ a {
   text-align: right;
   color: #b4b4b4;
 }
-#history-wrap .day-money-wrap .history {
+#history-wrap .day-money-wrap .day-use__wrap .history {
   position: relative;
 }
-#history-wrap .day-money-wrap .history .history_list {
+#history-wrap .day-money-wrap .day-use__wrap .history .history_list {
   display: flex;
   justify-content: space-between;
   font-size: 1.8rem;
@@ -388,11 +416,6 @@ a {
 }
 #history-wrap .day-money-wrap .history .history_list:last-child {
   margin-bottom: 38px;
-}
-
-#history-wrap .day-use .history .history_list .item {
-}
-#history-wrap .day-use .history .history_list .price {
 }
 
 /* NAV */

@@ -215,3 +215,25 @@ const swiper = new Swiper('.my-swiper', {
   },
   touchRatio: 0.05,
 })
+
+// input range
+const changeRange = (e) => {
+  e.stopPropagation()
+  console.log('move')
+  const rangeBtn = document.querySelector('#account-range')
+  let value =
+    (rangeBtn.value - rangeBtn.getAttribute('min')) /
+    (rangeBtn.getAttribute('max') - rangeBtn.getAttribute('min'))
+  console.log(value)
+  rangeBtn.style.backgroundImage =
+    '-webkit-gradient(linear, left top, right top, ' +
+    'color-stop(' +
+    value +
+    ', #ffdb4c),' +
+    'color-stop(' +
+    value +
+    ', #c4c4c4)' +
+    ' );'
+
+  console.log(rangeBtn.style.backgroundImage)
+}

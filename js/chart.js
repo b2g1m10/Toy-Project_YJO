@@ -1,6 +1,6 @@
 // day-money
 const dayUseWrap = document.querySelector('.day-use__wrap')
-const history = document.querySelector('.history')
+
 const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
 let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
 gradient.addColorStop(0, 'rgba(0,189,178,1')
@@ -8,23 +8,106 @@ gradient.addColorStop(1, 'rgba(17,242,229,0.1')
 getData()
 
 async function getData() {
-  const response = await fetch('https://eulsoo.github.io/list.json')
+  const response = await fetch('../data.json')
   // console.log(response)
   const data = await response.json()
   // console.log(data)
-  length = data.length
+
   // console.log(length)
 
-  labels = []
-  values = []
-  label = []
-  averageVal = []
-  sum = 0
+  insertTxt(data)
+}
+
+function insertTxt(data) {
+  // console.log(data)
+
+  // GroubBy -> data를 key를 기준으로 그룹 짓는다
+  const groupBy = function (data, key) {
+    return data.reduce(function (carry, el) {
+      var group = el[key]
+
+      if (carry[group] === undefined) {
+        carry[group] = []
+      }
+
+      carry[group].push(el)
+      return carry
+    }, {})
+  }
+  const dateArr = groupBy(data, 'date')
+  // console.log(dateArr)
+
+  for (const [key, value] of Object.entries(dateArr)) {
+    keyValue(key, value)
+    // console.log(key, value)
+  }
+
+  function keyValue(key, value) {
+    let totalPrice = 0
+
+    const itemWrap = document.createElement('div')
+    itemWrap.classList.add('itemWrap')
+
+    const dayTotal = document.createElement('div')
+    dayTotal.classList.add('day-total')
+
+    const day = document.createElement('h3')
+    day.classList.add('day')
+    day.textContent = key
+
+    const daySpend = document.createElement('h3')
+    daySpend.classList.add('day-spend')
+
+    const history = document.createElement('ul')
+    history.classList.add('history')
+
+    for (let i = 0; i < value.length; i++) {
+      totalPrice = totalPrice + value[i].price
+
+      const itemName = document.createElement('h3')
+      itemName.classList.add('item')
+      itemName.textContent = value[i].item
+
+      const itemPrice = document.createElement('h3')
+      itemPrice.textContent = value[i].price + '원'
+
+      const historyList = document.createElement('li')
+      historyList.classList.add('history_list')
+
+      historyList.appendChild(itemName)
+      historyList.appendChild(itemPrice)
+      history.appendChild(historyList)
+    }
+    daySpend.textContent = `총 ${totalPrice}원`
+    dayUseWrap.appendChild(itemWrap)
+
+    itemWrap.appendChild(dayTotal)
+    dayTotal.appendChild(day)
+    dayTotal.appendChild(daySpend)
+    itemWrap.appendChild(history)
+  }
+
+  //
+  const length = data.length
+  // console.log(length)
+  let labels = []
+  let values = []
+  let label = []
+  // averageVal = []
+  // sum = 0
   for (i = 0; i < length; i++) {
     label.push(data[i].item)
-    labels.push(data[i].date)
-    values.push(data[i].price)
-    averageVal.push((sum = sum + data[i].price) / length)
+    // averageVal.push((sum = sum + data[i].price) / length)
+  }
+  for (const x in dateArr) {
+    labels.push(x)
+    totalPrice = 0
+    // console.log('x', x)
+    for (let i = 0; i < dateArr[x].length; i++) {
+      totalPrice = totalPrice + dateArr[x][i].price
+      // console.log(dateArr[x][i].item)
+    }
+    values.push(totalPrice)
   }
 
   // Daily-canvas
@@ -91,51 +174,4 @@ async function getData() {
       },
     },
   })
-
-  insertTxt(data)
-}
-
-/* 
-  insrertTxt 
-
-  1. data를 받아온다
-  2. 날짜를 비교해서 오늘 / 어제 / 그제 를 나눈다
-  3. 오늘 날짜에 해당하는 item과 price를 textContent로 넣어준다
-*/
-
-function insertTxt(data) {
-  // console.log(data[0].date)
-  let totalPrice = 0
-
-  const daySpend = document.createElement('h3')
-  daySpend.classList.add('day-spend')
-
-  for (let i = 0; i < data.length; i++) {
-    const liHistory = document.createElement('li')
-    liHistory.classList.add('history_list')
-    const historyItem = document.createElement('h3')
-    historyItem.classList.add('item')
-    const historyPrice = document.createElement('h3')
-    historyPrice.classList.add('price')
-
-    if (data[i].date === '2021.9.1') {
-      historyItem.textContent = data[i].item
-      historyPrice.textContent = data[i].price
-      totalPrice = totalPrice + data[i].price
-      // console.log(totalPrice)
-
-      liHistory.appendChild(historyItem)
-      liHistory.appendChild(historyPrice)
-      history.appendChild(liHistory)
-    } else if (data[i].date === '2021.9.2') {
-      historyItem.textContent = data[i].item
-      historyPrice.textContent = data[i].price
-      totalPrice = totalPrice + data[i].price
-      liHistory.appendChild(historyItem)
-      liHistory.appendChild(historyPrice)
-      history.appendChild(liHistory)
-    }
-  }
-  daySpend.textContent = `${totalPrice}원 지출`
-  dayUseWrap.appendChild(daySpend)
 }
