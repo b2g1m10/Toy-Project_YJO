@@ -229,7 +229,5 @@ const rangeBtn = document.querySelector('#account-range')
 const progressbar = document.querySelector('#progress__bar')
 rangeBtn.oninput = () => {
   let value = rangeBtn.value
-  console.log(value)
   progressbar.style.width = value + '%'
-  // value.style.left = value / 2 + '%'
 }
