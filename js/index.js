@@ -3,6 +3,7 @@ const historyWrap = document.querySelector('#history-wrap')
 const dragArea = document.querySelector('.drag-area')
 const header = document.querySelector('#header')
 const middleText = document.querySelector('.middle--text')
+const dayWrap = document.querySelector('.day-use__wrap')
 let isDown = false,
   initY,
   firstY
@@ -43,16 +44,23 @@ dragArea.addEventListener('mousedown', (e) => {
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
   dragArea.style.cursor = 'grabbbing'
-  checkboundary()
+  checkboundary(e)
 }
-const checkboundary = () => {
+const checkboundary = (e) => {
   let headerOuter = header.getBoundingClientRect()
   let historyInner = historyWrap.getBoundingClientRect()
   let adOuter = middleText.getBoundingClientRect()
+  console.log('adOuter.bottom', adOuter.bottom)
+  console.log('adOuter.top', adOuter)
+  console.log('historyInner.top', historyInner.top)
+  console.log(e.clientY)
+  // console.log(e)
   if (historyInner.top <= headerOuter.bottom) {
     historyWrap.style.top = `${headerOuter.top}px`
+    // moneySlider.style.maxHeight = '500px'
   } else if (historyInner.top >= adOuter.bottom) {
     historyWrap.style.top = `${adOuter.bottom - 50}px`
+    // moneySlider.style.maxHeight = '300px'
   }
 }
 
@@ -92,52 +100,52 @@ const checkGoalBoundary = () => {
   }
 }
 // day-money-drag
-moneyWrap.addEventListener('mousedown', (e) => {
-  e.preventDefault()
-  moneyDown = true
-  moneyY = moneySlider.offsetTop
-  firstMoney = e.pageY
+// moneyWrap.addEventListener('mousedown', (e) => {
+//   e.preventDefault()
+//   moneyDown = true
+//   moneyY = moneySlider.offsetTop
+//   firstMoney = e.pageY
 
-  moneyWrap.style.cursor = 'grab'
-  moneyWrap.addEventListener('mousemove', dragHistory, false)
-  window.addEventListener(
-    'mouseup',
-    () => {
-      moneyWrap.removeEventListener('mousemove', dragHistory, false)
-      moneyWrap.style.cursor = 'Default'
-    },
-    false
-  )
-})
+//   moneyWrap.style.cursor = 'grab'
+//   moneyWrap.addEventListener('mousemove', dragHistory, false)
+//   window.addEventListener(
+//     'mouseup',
+//     () => {
+//       moneyWrap.removeEventListener('mousemove', dragHistory, false)
+//       moneyWrap.style.cursor = 'Default'
+//     },
+//     false
+//   )
+// })
 
-const dragHistory = (e) => {
-  // console.log(e)
-  moneySlider.style.top = moneyY + e.pageY - firstMoney + 'px'
-  moneyWrap.style.cursor = 'grabbing'
-  HisotryBoundary()
-}
+// const dragHistory = (e) => {
+//   // console.log(e)
+//   moneySlider.style.top = moneyY + e.pageY - firstMoney + 'px'
+//   moneyWrap.style.cursor = 'grabbing'
+//   HisotryBoundary()
+// }
 
-const HisotryBoundary = () => {
-  let moneyOuter = moneyWrap.getBoundingClientRect()
-  let moneyInner = moneySlider.getBoundingClientRect()
-  // console.log('------------------ outer')
-  // console.log('moneyOuter-height', moneyOuter.height)
-  // console.log('moneyOuter-bottom', moneyOuter.bottom)
-  // console.log('moneyOuter -top', moneyOuter.top)
-  // console.log('------------------ inner')
-  // console.log('moneyInner -height', moneyInner.height)
-  // console.log('moneyInner -bottom', moneyInner.bottom)
-  // console.log('moneyInner -top', moneyInner.top)
+// const HisotryBoundary = () => {
+//   let moneyOuter = moneyWrap.getBoundingClientRect()
+//   let moneyInner = moneySlider.getBoundingClientRect()
+//   // console.log('------------------ outer')
+//   // console.log('moneyOuter-height', moneyOuter.height)
+//   // console.log('moneyOuter-bottom', moneyOuter.bottom)
+//   // console.log('moneyOuter -top', moneyOuter.top)
+//   // console.log('------------------ inner')
+//   // console.log('moneyInner -height', moneyInner.height)
+//   // console.log('moneyInner -bottom', moneyInner.bottom)
+//   // console.log('moneyInner -top', moneyInner.top)
 
-  let moneyOuterSum = moneyOuter.height - moneyOuter.bottom
-  let innerSum = moneyOuter.height - moneyInner.height
-  if (parseInt(moneySlider.style.top) >= 0) {
-    moneySlider.style.top = `0px`
-  } else if (moneyInner.bottom < moneyOuter.height) {
-    moneySlider.style.top = moneyOuterSum + innerSum + 'px'
-  }
-}
-
+//   let moneyOuterSum = moneyOuter.height - moneyOuter.bottom
+//   let innerSum = moneyOuter.height - moneyInner.height
+//   if (parseInt(moneySlider.style.top) >= 0) {
+//     moneySlider.style.top = `0px`
+//   } else if (moneyInner.bottom < moneyOuter.height) {
+//     moneySlider.style.top = moneyOuterSum + innerSum + 'px'
+//   }
+// }
+// console.log(moneySlider.clientHeight)
 // PopUp
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')

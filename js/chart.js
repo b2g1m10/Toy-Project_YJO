@@ -1,6 +1,6 @@
 // day-money
 const dayUseWrap = document.querySelector('.day-use__wrap')
-
+const monthList = document.querySelector('.month__list')
 const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
 let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
 gradient.addColorStop(0, 'rgba(0,189,178,1')
@@ -36,6 +36,8 @@ function insertTxt(data) {
   }
   const dateArr = groupBy(data, 'date')
   // console.log(dateArr)
+  const typeArr = groupBy(data, 'type')
+  // console.log(typeArr)
 
   for (const [key, value] of Object.entries(dateArr)) {
     keyValue(key, value)
@@ -72,10 +74,11 @@ function insertTxt(data) {
       if (value[i].inOut === 'out') {
         totalPrice = totalPrice + value[i].price
         itemPrice.classList.add('price-out')
-        itemPrice.textContent = value[i].price + '원'
+        itemPrice.textContent = value[i].price.toLocaleString('en-US') + '원'
       } else {
         itemPrice.classList.add('price-in')
-        itemPrice.textContent = '+ ' + value[i].price + '원'
+        itemPrice.textContent =
+          '+ ' + value[i].price.toLocaleString('en-US') + '원'
       }
 
       const historyList = document.createElement('li')
@@ -85,7 +88,7 @@ function insertTxt(data) {
       historyList.appendChild(itemPrice)
       history.appendChild(historyList)
     }
-    daySpend.textContent = `총 ${totalPrice}원`
+    daySpend.textContent = `${totalPrice.toLocaleString('en-US')}원 지출`
     dayUseWrap.appendChild(itemWrap)
 
     itemWrap.appendChild(dayTotal)
@@ -96,25 +99,84 @@ function insertTxt(data) {
 
   //
   const length = data.length
-  // console.log(length)
+
   let labels = []
-  let values = []
+  let dailyValues = []
+  let monthValues = []
   let label = []
-  // averageVal = []
-  // sum = 0
+
   for (i = 0; i < length; i++) {
     label.push(data[i].item)
-    // averageVal.push((sum = sum + data[i].price) / length)
   }
-  for (const x in dateArr) {
-    labels.push(x)
+  for (const date in dateArr) {
+    labels.push(date)
     totalPrice = 0
     // console.log('x', x)
-    for (let i = 0; i < dateArr[x].length; i++) {
-      totalPrice = totalPrice + dateArr[x][i].price
+    for (let i = 0; i < dateArr[date].length; i++) {
+      totalPrice = totalPrice + dateArr[date][i].price
       // console.log(dateArr[x][i].item)
     }
-    values.push(totalPrice)
+    dailyValues.push(totalPrice)
+    // console.log(dateArr[date])
+  }
+  for (const type in typeArr) {
+    let priceArr = []
+    totalPrice = 0
+
+    // console.log(typeArr[type][0].date.includes('2022.4'))
+    for (let i = 0; i < typeArr[type].length; i++) {
+      if (typeArr[type][i].date.includes('2022.4')) {
+        totalPrice = totalPrice + typeArr[type][i].price
+      }
+    }
+    priceArr.push(totalPrice)
+    // console.log(priceArr)
+
+    // console.log(filterPrice)
+    for (let i = 0; i < priceArr.length; i++) {
+      // console.log(priceArr.length)
+
+      if (priceArr[i] > 0) {
+        const liEl = document.createElement('li')
+        liEl.classList.add('month__list--li')
+        monthList.appendChild(liEl)
+        const icon = document.createElement('img')
+        icon.classList.add('icon')
+        const price = document.createElement('price')
+        price.classList.add('price')
+        const title = document.createElement('h3')
+        title.classList.add('title')
+
+        if (typeArr[type][i].type === 'eatout' && priceArr[i] > 0) {
+          title.textContent = 'eatout'
+          price.textContent = priceArr[i].toLocaleString()
+          icon.setAttribute('src', './images/month-eatout.svg')
+        } else if (typeArr[type][i].type === 'shopping' && priceArr[i] > 0) {
+          // console.log(typeArr[type][i].type)
+          title.textContent = 'shopping'
+          price.textContent = priceArr[i].toLocaleString()
+          icon.setAttribute('src', './images/month-shopping.svg')
+        } else if (typeArr[type][i].type === 'mart' && priceArr[i] > 0) {
+          title.textContent = 'mart'
+          price.textContent = priceArr[i].toLocaleString()
+          icon.setAttribute('src', './images/month-mart.svg')
+        } else if (typeArr[type][i].type === 'transport' && priceArr[i] > 0) {
+          title.textContent = 'transport'
+          price.textContent = priceArr[i].toLocaleString()
+          icon.setAttribute('src', './images/month-transport.svg')
+        } else if (typeArr[type][i].type === 'health' && priceArr[i] > 0) {
+          title.textContent = typeArr[type][i].type
+          price.textContent = priceArr[i].toLocaleString()
+          icon.setAttribute('src', './images/month-health.svg')
+        }
+
+        liEl.appendChild(icon)
+        liEl.appendChild(title)
+        liEl.appendChild(price)
+      }
+    }
+    monthValues.push(totalPrice)
+    // console.log(totalPrice)
   }
 
   // Daily-canvas
@@ -123,10 +185,18 @@ function insertTxt(data) {
       labels: labels,
       datasets: [
         {
+          type: 'line',
+          label: '일간 리포트',
+          backgroundColor: '#ff5f00',
+          data: dailyValues,
+          borderColor: '#ff5f00',
+          PointStyle: 'dash',
+        },
+        {
           type: 'bar',
           label: '일간 리포트',
           backgroundColor: gradient,
-          data: values,
+          data: dailyValues,
           hoverBackgroundColor: '#09837c',
           PointStyle: 'dash',
         },
@@ -156,25 +226,24 @@ function insertTxt(data) {
   // Month-canvas
   new Chart(document.getElementById('month-canvas'), {
     type: 'doughnut',
+    labels: monthValues,
     data: {
       datasets: [
         {
-          label: '6월 지출 패턴',
+          label: '4월 지출 패턴',
           backgroundColor: [
-            '#3e95cd',
             '#8e5ea2',
             '#3cba9f',
             '#e8c3b9',
             '#c45850',
-            '#CD5C5C',
             '#40E0D0',
           ],
-          data: values,
+          data: monthValues,
         },
       ],
     },
     options: {
-      legend: { display: false },
+      legend: { display: true },
       title: {
         display: true,
         text: '원',
