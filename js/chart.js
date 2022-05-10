@@ -6,6 +6,11 @@ let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
 gradient.addColorStop(0, 'rgba(0,189,178,1')
 gradient.addColorStop(1, 'rgba(17,242,229,0.1')
 getData()
+let dailyLabels = []
+let dailyValues = []
+let monthValues = []
+let monthLabels = []
+let label = []
 
 async function getData() {
   const response = await fetch('../data.json')
@@ -17,8 +22,6 @@ async function getData() {
 }
 
 function insertTxt(data) {
-  // console.log(data)
-
   // GroubBy -> data를 key를 기준으로 그룹 짓는다
   const groupBy = function (data, key) {
     return data.reduce(function (carry, el) {
@@ -33,80 +36,21 @@ function insertTxt(data) {
     }, {})
   }
   const dateArr = groupBy(data, 'date')
-  // console.log(dateArr)
+
   const typeArr = groupBy(data, 'type')
-  // console.log(typeArr)
 
   for (const [key, value] of Object.entries(dateArr)) {
-    keyValue(key, value)
-    // console.log(key, value)
+    dailyKeyValue(key, value)
+  }
+  for (const [key, value] of Object.entries(typeArr)) {
+    // monthKeyValue(key, value)
   }
 
-  function keyValue(key, value) {
-    let totalPrice = 0
-
-    const itemWrap = document.createElement('div')
-    itemWrap.classList.add('itemWrap')
-
-    const dayTotal = document.createElement('div')
-    dayTotal.classList.add('day-total')
-
-    const day = document.createElement('h3')
-    day.classList.add('day')
-    day.textContent = key
-
-    const daySpend = document.createElement('h3')
-    daySpend.classList.add('day-spend')
-
-    const history = document.createElement('ul')
-    history.classList.add('history')
-
-    for (let i = 0; i < value.length; i++) {
-      // console.log(value[i].inOut)
-
-      const itemName = document.createElement('h3')
-      itemName.classList.add('item')
-      itemName.textContent = value[i].item
-
-      const itemPrice = document.createElement('h3')
-      if (value[i].inOut === 'out') {
-        totalPrice = totalPrice + value[i].price
-        itemPrice.classList.add('price-out')
-        itemPrice.textContent = value[i].price.toLocaleString('en-US') + '원'
-      } else {
-        itemPrice.classList.add('price-in')
-        itemPrice.textContent =
-          '+ ' + value[i].price.toLocaleString('en-US') + '원'
-      }
-
-      const historyList = document.createElement('li')
-      historyList.classList.add('history_list')
-
-      historyList.appendChild(itemName)
-      historyList.appendChild(itemPrice)
-      history.appendChild(historyList)
-    }
-    daySpend.textContent = `${totalPrice.toLocaleString('en-US')}원 지출`
-    dayUseWrap.appendChild(itemWrap)
-
-    itemWrap.appendChild(dayTotal)
-    dayTotal.appendChild(day)
-    dayTotal.appendChild(daySpend)
-    itemWrap.appendChild(history)
-  }
-
-  //
   const length = data.length
-
-  let dailyLabels = []
-  let dailyValues = []
-  let monthValues = []
-  let monthLabels = []
-  let label = []
-
   for (i = 0; i < length; i++) {
     label.push(data[i].item)
   }
+
   for (const date in dateArr) {
     dailyLabels.push(date)
     totalPrice = 0
@@ -118,6 +62,7 @@ function insertTxt(data) {
     dailyValues.push(totalPrice)
     // console.log(dateArr[date])
   }
+
   for (const type in typeArr) {
     if (type !== '') {
       monthLabels.push(type)
@@ -126,19 +71,14 @@ function insertTxt(data) {
     let priceArr = []
     totalPrice = 0
 
-    // console.log(typeArr[type][0].date.includes('2022.4'))
     for (let i = 0; i < typeArr[type].length; i++) {
       if (typeArr[type][i].date.includes('2022.4')) {
         totalPrice = totalPrice + typeArr[type][i].price
       }
     }
     priceArr.push(totalPrice)
-    // console.log(priceArr)
 
-    // console.log(filterPrice)
     for (let i = 0; i < priceArr.length; i++) {
-      // console.log(priceArr)
-
       if (priceArr[i] > 0) {
         const liEl = document.createElement('li')
         liEl.classList.add('month__list--li')
@@ -214,15 +154,6 @@ function insertTxt(data) {
         text: '원',
       },
       responsive: true,
-      scales: {
-        // y: {
-        //   ticks: {
-        //     callback: function (val) {
-        //       return val + 'k'
-        //     },
-        //   },
-        // },
-      },
     },
   })
 
@@ -234,7 +165,7 @@ function insertTxt(data) {
       labels: ['eatout', 'shopping', 'mart', 'health'],
       datasets: [
         {
-          label: '# of Votes',
+          label: '',
           data: ['47000', '241200', '7800', '140000'],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -257,16 +188,80 @@ function insertTxt(data) {
       ],
     },
     options: {
+      responsive: true,
       plugins: {
         legend: {
           position: 'top',
         },
-      },
-      scales: {
-        y: {
-          beginAtZero: false,
+        title: {
+          display: true,
+          text: `총 ${monthValues.reduce((e, a) => {
+            return e + a
+          })}원`,
         },
       },
     },
   })
 }
+
+// dayily
+function dailyKeyValue(key, value) {
+  let totalPrice = 0
+  const itemWrap = document.createElement('div')
+  itemWrap.classList.add('itemWrap')
+
+  const dayTotal = document.createElement('div')
+  dayTotal.classList.add('day-total')
+
+  const day = document.createElement('h3')
+  day.classList.add('day')
+  day.textContent = key
+
+  const daySpend = document.createElement('h3')
+  daySpend.classList.add('day-spend')
+
+  const history = document.createElement('ul')
+  history.classList.add('history')
+
+  for (let i = 0; i < value.length; i++) {
+    // console.log(value[i].inOut)
+
+    const itemName = document.createElement('h3')
+    itemName.classList.add('item')
+    itemName.textContent = value[i].item
+
+    const itemPrice = document.createElement('h3')
+    if (value[i].inOut === 'out') {
+      totalPrice = totalPrice + value[i].price
+      itemPrice.classList.add('price-out')
+      itemPrice.textContent = value[i].price.toLocaleString() + '원'
+    } else {
+      itemPrice.classList.add('price-in')
+      itemPrice.textContent = '+ ' + value[i].price.toLocaleString() + '원'
+    }
+
+    const historyList = document.createElement('li')
+    historyList.classList.add('history_list')
+
+    historyList.appendChild(itemName)
+    historyList.appendChild(itemPrice)
+    history.appendChild(historyList)
+  }
+  daySpend.textContent = `${totalPrice.toLocaleString()}원 지출`
+  dayUseWrap.appendChild(itemWrap)
+
+  itemWrap.appendChild(dayTotal)
+  dayTotal.appendChild(day)
+  dayTotal.appendChild(daySpend)
+  itemWrap.appendChild(history)
+}
+
+// Month
+// function monthKeyValue(key, value) {
+//   if (key !== '') {
+//     monthLabels.push(key)
+//     for (x of value) {
+//       console.log(x.date.includes('2022.4'))
+//     }
+//   }
+// }
