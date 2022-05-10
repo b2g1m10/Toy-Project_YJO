@@ -250,9 +250,19 @@ const swiper = new Swiper('.my-swiper', {
 })
 
 // input range
-const rangeBtn = document.querySelector('#account-range')
-const progressbar = document.querySelector('#progress__bar')
+const rangeBtn = document.querySelector('.section1 .account-range')
+
+const progressbar = document.querySelector('.section1 .progress__bar')
+// console.log(progressbar)
 rangeBtn.oninput = () => {
   let value = rangeBtn.value
   progressbar.style.width = value + '%'
+}
+const rangeBtn2 = document.querySelector('.section2 .account-range')
+
+const progressbar2 = document.querySelector('.section2 .progress__bar')
+// console.log(progressbar)
+rangeBtn2.oninput = () => {
+  let value = rangeBtn2.value
+  progressbar2.style.width = value + '%'
 }
