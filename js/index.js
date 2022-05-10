@@ -48,7 +48,7 @@ const dragIt = (e) => {
   // let sliderOuter = historyWrap.getBoundingClientRect()
 
   // console.log('historyWrap.top', sliderOuter.top)
-  console.log('historyWrap', historyWrap.offsetTop)
+  // console.log('historyWrap', historyWrap.offsetTop)
   // console.log('historyWrap.y', sliderOuter.y)
   // console.log('historyWrap.', sliderOuter)
   // console.log(e.pageY)
