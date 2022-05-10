@@ -13,8 +13,6 @@ async function getData() {
   const data = await response.json()
   // console.log(data)
 
-  // console.log(length)
-
   insertTxt(data)
 }
 
@@ -100,16 +98,17 @@ function insertTxt(data) {
   //
   const length = data.length
 
-  let labels = []
+  let dailyLabels = []
   let dailyValues = []
   let monthValues = []
+  let monthLabels = []
   let label = []
 
   for (i = 0; i < length; i++) {
     label.push(data[i].item)
   }
   for (const date in dateArr) {
-    labels.push(date)
+    dailyLabels.push(date)
     totalPrice = 0
     // console.log('x', x)
     for (let i = 0; i < dateArr[date].length; i++) {
@@ -120,6 +119,10 @@ function insertTxt(data) {
     // console.log(dateArr[date])
   }
   for (const type in typeArr) {
+    if (type !== '') {
+      monthLabels.push(type)
+    }
+
     let priceArr = []
     totalPrice = 0
 
@@ -134,7 +137,7 @@ function insertTxt(data) {
 
     // console.log(filterPrice)
     for (let i = 0; i < priceArr.length; i++) {
-      // console.log(priceArr.length)
+      // console.log(priceArr)
 
       if (priceArr[i] > 0) {
         const liEl = document.createElement('li')
@@ -182,7 +185,7 @@ function insertTxt(data) {
   // Daily-canvas
   new Chart(dayilyCtx, {
     data: {
-      labels: labels,
+      labels: dailyLabels,
       datasets: [
         {
           type: 'line',
@@ -224,29 +227,45 @@ function insertTxt(data) {
   })
 
   // Month-canvas
-  new Chart(document.getElementById('month-canvas'), {
+  const monthCtx = document.getElementById('month-canvas').getContext('2d')
+  const myChart = new Chart(monthCtx, {
     type: 'doughnut',
-    labels: monthValues,
     data: {
+      labels: ['eatout', 'shopping', 'mart', 'health'],
       datasets: [
         {
-          label: '4월 지출 패턴',
+          label: '# of Votes',
+          data: ['47000', '241200', '7800', '140000'],
           backgroundColor: [
-            '#BD5B00',
-            '#0057BD',
-            '#00BDB2',
-            '#FEC229',
-            '#C4C4C4',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
           ],
-          data: monthValues,
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderWidth: 1,
         },
       ],
     },
     options: {
-      legend: { display: true },
-      title: {
-        display: true,
-        text: '원',
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+        },
       },
     },
   })
