@@ -232,11 +232,11 @@ function insertTxt(data) {
         {
           label: '4월 지출 패턴',
           backgroundColor: [
-            '#8e5ea2',
-            '#3cba9f',
-            '#e8c3b9',
-            '#c45850',
-            '#40E0D0',
+            '#BD5B00',
+            '#0057BD',
+            '#00BDB2',
+            '#FEC229',
+            '#C4C4C4',
           ],
           data: monthValues,
         },
