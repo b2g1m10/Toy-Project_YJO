@@ -255,13 +255,3 @@ function dailyKeyValue(key, value) {
   dayTotal.appendChild(daySpend)
   itemWrap.appendChild(history)
 }
-
-// Month
-// function monthKeyValue(key, value) {
-//   if (key !== '') {
-//     monthLabels.push(key)
-//     for (x of value) {
-//       console.log(x.date.includes('2022.4'))
-//     }
-//   }
-// }
