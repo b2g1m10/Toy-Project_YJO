@@ -48,13 +48,6 @@ const dragIt = (e) => {
   // console.log(e.pageY)
   // console.log(firstY)
   dragArea.style.cursor = 'grabbbing'
-  // let sliderOuter = historyWrap.getBoundingClientRect()
-
-  // console.log('historyWrap.top', sliderOuter.top)
-  // console.log('historyWrap', historyWrap.offsetTop)
-  // console.log('historyWrap.y', sliderOuter.y)
-  // console.log('historyWrap.', sliderOuter)
-  // console.log(e.pageY)
 
   if (parseInt(historyWrap.style.top) < 349) {
     moneySlider.style.maxHeight =
@@ -69,9 +62,6 @@ const checkboundary = () => {
   let adOuter = middleText.getBoundingClientRect()
   let windowY = window.scrollY
   // console.log(windowY)
-  // console.log('headerOuter.bottom', headerOuter.bottom)
-  // console.log('headerOuter.top', headerOuter.top)
-  // console.log('historyInner.top', historyInner.top)
 
   if (windowY > 0) {
     if (historyInner.top <= headerOuter.bottom) {
@@ -184,15 +174,6 @@ const popupBoundary = () => {
   let outerPopup = popup.getBoundingClientRect()
   let innerPopup = popupSlide.getBoundingClientRect()
   let navTop = nav.getBoundingClientRect()
-  // console.log('outerPopup - height', outerPopup.height)
-  // console.log('outerPopup - bottom', outerPopup.bottom)
-  // console.log('innerPopup - height', innerPopup.height)
-  // console.log('innerPopup - bottom', innerPopup.bottom)
-  // console.log(innerSum)
-  // console.log(outerSum)
-  // console.log(navTop.height)
-
-  // console.log(`${innerPopup.bottom}` - `${innerPopup.height}`)
   if (parseInt(popupSlide.style.top) >= 0) {
     popupSlide.style.top = '0px'
   } else if (innerPopup.bottom + navTop.height < outerPopup.bottom) {
@@ -233,7 +214,6 @@ rangeBtn.oninput = () => {
 const rangeBtn2 = document.querySelector('.section2 .account-range')
 
 const progressbar2 = document.querySelector('.section2 .progress__bar')
-// console.log(progressbar)
 rangeBtn2.oninput = () => {
   let value = rangeBtn2.value
   progressbar2.style.width = value + '%'
