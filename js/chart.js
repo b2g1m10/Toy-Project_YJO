@@ -20,6 +20,7 @@ async function getData() {
   insertTxt(data)
 }
 const groupBy = function (data, key) {
+  // GroubBy -> data를 key를 기준으로 그룹 짓는다
   return data.reduce(function (carry, el) {
     var group = el[key]
     if (carry[group] === undefined) {
@@ -30,8 +31,6 @@ const groupBy = function (data, key) {
   }, {})
 }
 function insertTxt(data) {
-  // GroubBy -> data를 key를 기준으로 그룹 짓는다
-
   // Daily Value
   const dateArr = groupBy(data, 'date')
   for (const [key, value] of Object.entries(dateArr)) {
