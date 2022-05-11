@@ -126,17 +126,13 @@ function dailyKeyValue(key, value) {
   let totalPrice = 0
   const itemWrap = document.createElement('div')
   itemWrap.classList.add('itemWrap')
-
   const dayTotal = document.createElement('div')
   dayTotal.classList.add('day-total')
-
   const day = document.createElement('h3')
   day.classList.add('day')
   day.textContent = key
-
   const daySpend = document.createElement('h3')
   daySpend.classList.add('day-spend')
-
   const history = document.createElement('ul')
   history.classList.add('history')
 
@@ -159,14 +155,13 @@ function dailyKeyValue(key, value) {
 
     const historyList = document.createElement('li')
     historyList.classList.add('history_list')
-
     historyList.appendChild(itemName)
     historyList.appendChild(itemPrice)
     history.appendChild(historyList)
   }
   daySpend.textContent = `${totalPrice.toLocaleString()}원 지출`
-  dayUseWrap.appendChild(itemWrap)
 
+  dayUseWrap.appendChild(itemWrap)
   itemWrap.appendChild(dayTotal)
   dayTotal.appendChild(day)
   dayTotal.appendChild(daySpend)

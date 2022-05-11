@@ -178,7 +178,7 @@ const checkGoalBoundary = () => {
 /* 
 
    ///////// PopUp 
-   
+  
 */
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
