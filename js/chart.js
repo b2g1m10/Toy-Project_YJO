@@ -14,11 +14,14 @@ let label = []
 // console.log(monthLabels)
 getData()
 
+// Featch Data
 async function getData() {
   const response = await fetch('../data.json')
   const data = await response.json()
   insertTxt(data)
 }
+
+// GroupBy
 const groupBy = function (data, key) {
   // GroubBy -> data를 key를 기준으로 그룹 짓는다
   return data.reduce(function (carry, el) {
@@ -30,6 +33,8 @@ const groupBy = function (data, key) {
     return carry
   }, {})
 }
+
+// insert Element
 function insertTxt(data) {
   // Daily Value
   const dateArr = groupBy(data, 'date')
@@ -52,7 +57,7 @@ function insertTxt(data) {
   const typeArr = groupBy(data, 'type')
 
   for (const [key, value] of Object.entries(typeArr)) {
-    // monthKeyValue(key, value)
+    // console.log(key, value)
     if (monthTotalValue(value) !== 0) {
       monthValues.push(monthTotalValue(value))
     }
@@ -112,6 +117,10 @@ function insertTxt(data) {
       title.textContent = 'mart'
       price.textContent = monthValues[i].toLocaleString()
       icon.setAttribute('src', '../images/month-mart.svg')
+    } else if (monthLabels[i] === 'transport') {
+      title.textContent = 'transport'
+      price.textContent = monthValues[i].toLocaleString()
+      icon.setAttribute('src', '../images/month-transport.svg')
     }
     liEl.appendChild(icon)
     liEl.appendChild(title)
