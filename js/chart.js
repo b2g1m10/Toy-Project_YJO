@@ -19,19 +19,18 @@ async function getData() {
   const data = await response.json()
   insertTxt(data)
 }
-
+const groupBy = function (data, key) {
+  return data.reduce(function (carry, el) {
+    var group = el[key]
+    if (carry[group] === undefined) {
+      carry[group] = []
+    }
+    carry[group].push(el)
+    return carry
+  }, {})
+}
 function insertTxt(data) {
   // GroubBy -> data를 key를 기준으로 그룹 짓는다
-  const groupBy = function (data, key) {
-    return data.reduce(function (carry, el) {
-      var group = el[key]
-      if (carry[group] === undefined) {
-        carry[group] = []
-      }
-      carry[group].push(el)
-      return carry
-    }, {})
-  }
 
   // Daily Value
   const dateArr = groupBy(data, 'date')
