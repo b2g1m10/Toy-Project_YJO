@@ -1,4 +1,3 @@
-// day-money
 const dayUseWrap = document.querySelector('.day-use__wrap')
 const monthList = document.querySelector('.month__list')
 const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')

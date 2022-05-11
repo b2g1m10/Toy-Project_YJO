@@ -28,6 +28,7 @@ dragArea.addEventListener('mousedown', (e) => {
   isDown = true
   initY = historyWrap.offsetTop
   firstY = e.pageY
+
   dragArea.style.cursor = 'grab'
   dragArea.addEventListener('mousemove', dragIt, false)
 
@@ -44,6 +45,8 @@ const section = document.querySelector('section')
 let initHeight = section.offsetHeight - 163
 const dragIt = (e) => {
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
+  // console.log(e.pageY)
+  // console.log(firstY)
   dragArea.style.cursor = 'grabbbing'
   // let sliderOuter = historyWrap.getBoundingClientRect()
 
@@ -171,7 +174,12 @@ const checkGoalBoundary = () => {
 //   }
 // }
 // console.log(moneySlider.clientHeight)
-// PopUp
+
+/* 
+
+   ///////// PopUp 
+   
+*/
 const graphBtn = document.querySelector('.graph-btn')
 const closeBtn = document.querySelector('.chart-close')
 const popup = document.querySelector('.popup-chart')
@@ -193,7 +201,8 @@ graphBtn.addEventListener('click', (e) => {
   popup.classList.remove('display-none')
   popupInit()
 })
-// drag event
+
+// Popup drag event
 
 popup.addEventListener('mousedown', (e) => {
   e.preventDefault()
@@ -238,7 +247,13 @@ const popupBoundary = () => {
       outerPopup.height - innerPopup.height - navTop.height + 'px'
   }
 }
-// swiper js
+
+/* 
+
+    /////// swiper js 
+
+*/
+
 const swiper = new Swiper('.my-swiper', {
   direction: 'horizontal',
   touchStartPreventDefault: false,
@@ -249,7 +264,11 @@ const swiper = new Swiper('.my-swiper', {
   touchRatio: 0.05,
 })
 
-// input range
+/* 
+
+    /////////  input range 
+
+*/
 const rangeBtn = document.querySelector('.section1 .account-range')
 
 const progressbar = document.querySelector('.section1 .progress__bar')
