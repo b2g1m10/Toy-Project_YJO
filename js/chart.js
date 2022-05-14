@@ -34,19 +34,14 @@ const groupBy = function (data, key) {
 let dailyLabels = []
 let dailyValues = []
 
-// 일별 데이타 분류 하기
-const dailyArrData = (data) => {
+function dailyArrData(data) {
+  // 일별로 데이터 분류
   const dateArr = groupBy(data, 'date')
-  dailyInsertHtml(dateArr)
-}
 
-// dayily Insert HTML
-function dailyInsertHtml(dateArr) {
-  // console.log(dateArr)
-
+  // 날짜를 기준으로 나머지 데이터 묶음
   for (const [dateText, dailyList] of Object.entries(dateArr)) {
     dailyLabels.push(dateText) // 날짜만 push
-    // console.log(dailyList)
+
     //총 합 구하기 out일 경우에만 더하고 values에 push
     const totalPrice = dailyList.reduce((prev, curr) => {
       // console.log(curr)
@@ -113,6 +108,7 @@ const monthArrData = (data) => {
   // 4월 데이터를 타입으로 분류
   const aprilTypeArr = groupBy(aprilData, 'type')
 
+  // 타입을 기준으로 나머지 묶음
   for (const [typeText, typeValue] of Object.entries(aprilTypeArr)) {
     monthLabels.push(typeText) // 타입만 push
     // console.log(typeText)
