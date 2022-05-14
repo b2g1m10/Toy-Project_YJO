@@ -1,31 +1,24 @@
 const dayUseWrap = document.querySelector('.day-use__wrap')
-const monthList = document.querySelector('.month__list')
+const monthUl = document.querySelector('.month__list')
 const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
 let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
 gradient.addColorStop(0, 'rgba(0,189,178,1')
 gradient.addColorStop(1, 'rgba(17,242,229,0.1')
 
-let dailyLabels = []
-let dailyValues = []
-let monthLabels = []
-let monthValues = []
-let label = []
-
-// console.log(monthLabels)
 getData()
 
 // Featch Data
 async function getData() {
   const response = await fetch('../data.json')
   const data = await response.json()
-  insertTxt(data)
+  dailyArrData(data)
+  monthArrData(data)
 }
 
-// GroupBy
+// GroupBy 모듈
 const groupBy = function (data, key) {
-  // GroubBy -> data를 key를 기준으로 그룹 짓는다
   return data.reduce(function (carry, el) {
-    var group = el[key]
+    let group = el[key]
     if (carry[group] === undefined) {
       carry[group] = []
     }
@@ -34,145 +27,122 @@ const groupBy = function (data, key) {
   }, {})
 }
 
-// insert Element
-function insertTxt(data) {
-  // Daily Value
+/* 
+    ----- 일별 지출
+*/
+
+let dailyLabels = []
+let dailyValues = []
+
+// 일별 데이타 분류 하기
+const dailyArrData = (data) => {
   const dateArr = groupBy(data, 'date')
-  for (const [key, value] of Object.entries(dateArr)) {
-    dailyKeyValue(key, value)
-  }
-  for (const date in dateArr) {
-    dailyLabels.push(date)
-    dailyPrice = 0
-
-    for (let i = 0; i < dateArr[date].length; i++) {
-      if (dateArr[date][i].inOut !== 'in') {
-        dailyPrice = dailyPrice + dateArr[date][i].price
-      }
-    }
-    dailyValues.push(dailyPrice)
-  }
-
-  // Month Value
-  const typeArr = groupBy(data, 'type')
-
-  for (const [key, value] of Object.entries(typeArr)) {
-    // console.log(key, value)
-    if (monthTotalValue(value) !== 0) {
-      monthValues.push(monthTotalValue(value))
-    }
-  }
-
-  function monthTotalValue(value) {
-    let totalPrice = 0
-    value.map((el) => {
-      // console.log(el)
-      if (el.inOut === 'out' && el.date.includes('2022.4')) {
-        if (el.type) {
-          totalPrice = totalPrice + el.price
-        }
-      }
-    })
-    return totalPrice
-  }
-
-  for (const type in typeArr) {
-    // console.log(type)
-    if (type !== '') {
-      // console.log(type)
-      for (const date in typeArr[type]) {
-        if (
-          typeArr[type][date].date.includes('2022.4') &&
-          monthLabels.indexOf(type) === -1
-        ) {
-          monthLabels.push(type)
-        }
-      }
-    }
-  }
-  for (let i = 0; i < monthLabels.length; i++) {
-    const liEl = document.createElement('li')
-    liEl.classList.add('month__list--li')
-    monthList.appendChild(liEl)
-    const icon = document.createElement('img')
-    icon.classList.add('icon')
-    const price = document.createElement('price')
-    price.classList.add('price')
-    const title = document.createElement('h3')
-    title.classList.add('title')
-
-    if (monthLabels[i] === 'eatout') {
-      title.textContent = 'eatout'
-      price.textContent = monthValues[i].toLocaleString()
-      icon.setAttribute('src', '../images/month-eatout.svg')
-    } else if (monthLabels[i] === 'shopping') {
-      title.textContent = 'shopping'
-      price.textContent = monthValues[i].toLocaleString()
-      icon.setAttribute('src', '../images/month-shopping.svg')
-    } else if (monthLabels[i] === 'health') {
-      title.textContent = 'health'
-      price.textContent = monthValues[i].toLocaleString()
-      icon.setAttribute('src', '../images/month-health.svg')
-    } else if (monthLabels[i] === 'mart') {
-      title.textContent = 'mart'
-      price.textContent = monthValues[i].toLocaleString()
-      icon.setAttribute('src', '../images/month-mart.svg')
-    } else if (monthLabels[i] === 'transport') {
-      title.textContent = 'transport'
-      price.textContent = monthValues[i].toLocaleString()
-      icon.setAttribute('src', '../images/month-transport.svg')
-    }
-    liEl.appendChild(icon)
-    liEl.appendChild(title)
-    liEl.appendChild(price)
-  }
+  dailyInsertHtml(dateArr)
 }
 
 // dayily Insert HTML
-function dailyKeyValue(key, value) {
-  let totalPrice = 0
-  const itemWrap = document.createElement('div')
-  itemWrap.classList.add('itemWrap')
-  const dayTotal = document.createElement('div')
-  dayTotal.classList.add('day-total')
-  const day = document.createElement('h3')
-  day.classList.add('day')
-  day.textContent = key
-  const daySpend = document.createElement('h3')
-  daySpend.classList.add('day-spend')
-  const history = document.createElement('ul')
-  history.classList.add('history')
+function dailyInsertHtml(dateArr) {
+  // console.log(dateArr)
 
-  for (let i = 0; i < value.length; i++) {
-    // console.log(value[i].inOut)
+  for (const [dateText, dailyList] of Object.entries(dateArr)) {
+    dailyLabels.push(dateText) // 날짜만 push
+    // console.log(dailyList)
+    //총 합 구하기 out일 경우에만 더하고 values에 push
+    const totalPrice = dailyList.reduce((prev, curr) => {
+      // console.log(curr)
+      switch (curr.inOut) {
+        case 'out':
+          return (prev += curr.price)
+        case 'in':
+          return prev
+        default:
+          break
+      }
+    }, 0)
+    dailyValues.push(totalPrice)
 
-    const itemName = document.createElement('h3')
-    itemName.classList.add('item')
-    itemName.textContent = value[i].item
+    // 일별 리스트 생성
+    const itemWrap = document.createElement('div')
+    const dayHistoryUl = document.createElement('ul')
 
-    const itemPrice = document.createElement('h3')
-    if (value[i].inOut === 'out') {
-      totalPrice = totalPrice + value[i].price
-      itemPrice.classList.add('price-out')
-      itemPrice.textContent = value[i].price.toLocaleString() + '원'
-    } else {
-      itemPrice.classList.add('price-in')
-      itemPrice.textContent = '+ ' + value[i].price.toLocaleString() + '원'
-    }
+    itemWrap.className = 'itemWrap'
+    dayHistoryUl.className = 'history'
 
-    const historyList = document.createElement('li')
-    historyList.classList.add('history_list')
-    historyList.appendChild(itemName)
-    historyList.appendChild(itemPrice)
-    history.appendChild(historyList)
+    itemWrap.innerHTML = `
+      <div class="day-total"> 
+        <h3 class="day">${dateText}</h3>
+        <h3 class="day-spend">${totalPrice.toLocaleString()}원 지출</h3>
+      </div>
+    `
+
+    dayUseWrap.appendChild(itemWrap)
+    itemWrap.appendChild(dayHistoryUl)
+
+    dailyList.forEach((item) => {
+      const HistoryLi = document.createElement('li')
+      HistoryLi.className = 'history_list'
+
+      HistoryLi.innerHTML = `
+        <h3 class="item">${item.item}</h3>
+        <h3 class="${item.inOut === 'in' ? 'price-in' : 'price-out'}">
+          ${
+            item.inOut === 'in'
+              ? '+' + item.price.toLocaleString()
+              : item.price.toLocaleString()
+          }원
+        </h3>
+      `
+      dayHistoryUl.appendChild(HistoryLi)
+    })
   }
-  daySpend.textContent = `${totalPrice.toLocaleString()}원 지출`
+}
 
-  dayUseWrap.appendChild(itemWrap)
-  itemWrap.appendChild(dayTotal)
-  dayTotal.appendChild(day)
-  dayTotal.appendChild(daySpend)
-  itemWrap.appendChild(history)
+/* 
+   ------ 월별 지출 패턴
+*/
+
+let monthLabels = []
+let monthValues = []
+
+const monthArrData = (data) => {
+  // 4월만 필터하기
+  const aprilData = data.filter((e) => {
+    return e.date.includes('2022.4')
+  })
+
+  // 4월 데이터를 타입으로 분류
+  const aprilTypeArr = groupBy(aprilData, 'type')
+
+  for (const [typeText, typeValue] of Object.entries(aprilTypeArr)) {
+    monthLabels.push(typeText) // 타입만 push
+    // console.log(typeText)
+    // console.log(typeValue)
+
+    // 타입 총합 구하기
+    const totalPrice = typeValue.reduce((prev, curr) => {
+      switch (curr.inOut) {
+        case 'out':
+          return (prev += curr.price)
+        default:
+          break
+      }
+    }, 0)
+    // console.log(totalPrice)
+    monthValues.push(totalPrice) // 타입 총합 push
+
+    // 월별 리스트 생성
+    const monthLi = document.createElement('li')
+    monthLi.className = 'month__list--li'
+    monthUl.appendChild(monthLi)
+
+    typeValue.forEach(() => {
+      monthLi.innerHTML = `
+        <img src="../images/month-${typeText}.svg" alt="${typeText}" class="icon"/>
+        <h3 class="title">${typeText}</h3>
+        <h3 class="price">${totalPrice}</h3>
+    `
+    })
+  }
 }
 
 /* 
@@ -181,7 +151,7 @@ function dailyKeyValue(key, value) {
 
 */
 
-// Daily-canvas
+// Daily - canvas
 new Chart(dayilyCtx, {
   data: {
     labels: dailyLabels,
@@ -216,7 +186,7 @@ new Chart(dayilyCtx, {
   },
 })
 
-// Month-canvas
+// // Month-canvas
 const monthCtx = document.getElementById('month-canvas').getContext('2d')
 const myChart = new Chart(monthCtx, {
   type: 'doughnut',

@@ -4,27 +4,24 @@ const dragArea = document.querySelector('.drag-area')
 const header = document.querySelector('#header')
 const middleText = document.querySelector('.middle--text')
 const dayWrap = document.querySelector('.day-use__wrap')
-let isDown = false,
-  initY,
-  firstY
+let isDown = false
+let initY, firstY
 // goalBtn
 const goalWrap = document.querySelector('.goal-wrap')
 const goalSlider = document.querySelector('.goal-slider')
-let isLeft = false,
-  initX,
-  firstX
+let isLeft = false
+let initX, firstX
 // day-money
 const moneyWrap = document.querySelector('.day-money-wrap')
 const moneySlider = document.querySelector('.day-money-slider')
 const nav = document.querySelector('#nav')
-let moneyDown = false,
-  moneyY,
-  firstMoney
+let moneyDown = false
+let moneyY, firstMoney
 // let moneyMove = false
 
 // historyWrap event
 dragArea.addEventListener('mousedown', (e) => {
-  e.preventDefault()
+  e.stopPropagation()
   isDown = true
   initY = historyWrap.offsetTop
   firstY = e.pageY
@@ -44,6 +41,7 @@ dragArea.addEventListener('mousedown', (e) => {
 const section = document.querySelector('section')
 let initHeight = section.offsetHeight - 163
 const dragIt = (e) => {
+  e.stopPropagation()
   historyWrap.style.top = initY + e.pageY - firstY + 'px'
   // console.log(e.pageY)
   // console.log(firstY)
@@ -66,25 +64,21 @@ const checkboundary = () => {
   if (windowY > 0) {
     if (historyInner.top <= headerOuter.bottom) {
       historyWrap.style.top = `${headerOuter.top + windowY}px`
-      // moneySlider.style.maxHeight = '543px'
     } else if (historyInner.top >= adOuter.bottom) {
       historyWrap.style.top = `${adOuter.bottom + windowY - 50}px`
-      // moneySlider.style.maxHeight = '300px'
     }
   } else {
     if (historyInner.top <= headerOuter.bottom) {
       historyWrap.style.top = `${headerOuter.top}px`
-      // moneySlider.style.maxHeight = '543px'
     } else if (historyInner.top >= adOuter.bottom) {
       historyWrap.style.top = `${adOuter.bottom - 50}px`
-      // moneySlider.style.maxHeight = '300px'
     }
   }
 }
 
 // goal Event
 goalWrap.addEventListener('mousedown', (e) => {
-  e.preventDefault()
+  e.stopPropagation()
   isLeft = true
   initX = goalSlider.offsetLeft
   firstX = e.pageX
@@ -101,7 +95,7 @@ goalWrap.addEventListener('mousedown', (e) => {
   )
 })
 const dragLeft = (e) => {
-  // console.log(e)
+  e.stopPropagation()
   goalSlider.style.left = initX + e.pageX - firstX + 'px'
   goalWrap.style.cursor = 'grabbing'
   checkGoalBoundary()
@@ -132,14 +126,14 @@ let popupInitY,
   firstPopup
 
 closeBtn.addEventListener('click', (e) => {
-  e.preventDefault()
+  e.stopPropagation()
   popup.classList.add('hide')
   setTimeout(() => {
     popup.classList.add('display-none')
   }, 300)
 })
 graphBtn.addEventListener('click', (e) => {
-  e.preventDefault()
+  e.stopPropagation()
   popup.classList.remove('hide')
   popup.classList.remove('display-none')
   popupInit()
@@ -148,7 +142,7 @@ graphBtn.addEventListener('click', (e) => {
 // Popup drag event
 
 popup.addEventListener('mousedown', (e) => {
-  e.preventDefault()
+  e.stopPropagation()
   popupDown = true
   firstPopup = e.pageY
   popupInitY = popupSlide.offsetTop
