@@ -34,7 +34,9 @@ const amount = (list) => {
 };
 
 /* 
-    ----- 일별 지출
+
+   ###########  일별 지출   ########### 
+
 */
 const dayUseWrap = document.querySelector('.day-use__wrap');
 let dailyLabels = [];
@@ -87,7 +89,9 @@ const dailyArrData = (data) => {
 };
 
 /* 
-   ------ 월별 지출 패턴
+
+   ###########  월별 지출 패턴  ########### 
+
 */
 const monthUl = document.querySelector('.month__list');
 
@@ -134,7 +138,7 @@ const monthArrData = (data) => {
 
 /* 
 
-     ###########   Chart
+     ###########   Chart  ########### 
 
 */
 
@@ -178,7 +182,7 @@ new Chart(dayilyCtx, {
   },
 });
 
-// // Month-canvas
+// Month-canvas
 const monthCtx = document.getElementById('month-canvas').getContext('2d');
 const myChart = new Chart(monthCtx, {
   type: 'doughnut',
