@@ -1,10 +1,3 @@
-const dayUseWrap = document.querySelector('.day-use__wrap')
-const monthUl = document.querySelector('.month__list')
-const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
-let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
-gradient.addColorStop(0, 'rgba(0,189,178,1')
-gradient.addColorStop(1, 'rgba(17,242,229,0.1')
-
 getData()
 
 // Featch Data
@@ -30,7 +23,7 @@ const groupBy = function (data, key) {
 /* 
     ----- 일별 지출
 */
-
+const dayUseWrap = document.querySelector('.day-use__wrap')
 let dailyLabels = []
 let dailyValues = []
 
@@ -95,7 +88,7 @@ function dailyArrData(data) {
 /* 
    ------ 월별 지출 패턴
 */
-
+const monthUl = document.querySelector('.month__list')
 let monthLabels = []
 let monthValues = []
 
@@ -135,7 +128,7 @@ const monthArrData = (data) => {
       monthLi.innerHTML = `
         <img src="../images/month-${typeText}.svg" alt="${typeText}" class="icon"/>
         <h3 class="title">${typeText}</h3>
-        <h3 class="price">${totalPrice}</h3>
+        <h3 class="price">${totalPrice.toLocaleString()}원</h3>
     `
     })
   }
@@ -148,6 +141,11 @@ const monthArrData = (data) => {
 */
 
 // Daily - canvas
+const dayilyCtx = document.getElementById('daily-canvas').getContext('2d')
+let gradient = dayilyCtx.createLinearGradient(0, 0, 0, 400)
+gradient.addColorStop(0, 'rgba(0,189,178,1')
+gradient.addColorStop(1, 'rgba(17,242,229,0.1')
+
 new Chart(dayilyCtx, {
   data: {
     labels: dailyLabels,
