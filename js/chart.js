@@ -54,7 +54,7 @@ function dailyInsertHtml(dateArr) {
         case 'out':
           return (prev += curr.price)
         case 'in':
-          return prev
+          return +0
         default:
           break
       }
