@@ -1,6 +1,9 @@
 // Featch Data
+const url =
+  'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f241926c-a20c-4021-af7d-028a1bbc6073/data.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220514%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220514T182814Z&X-Amz-Expires=86400&X-Amz-Signature=a44e3646414ac4d4ba44e25b97f53f2577191d58c66f65f55b94b58317331f4e&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22data.json%22&x-id=GetObject';
+
 const getData = async () => {
-  const response = await fetch('../data.json');
+  const response = await fetch(url);
   const data = await response.json();
   dailyArrData(data);
   monthArrData(data);
