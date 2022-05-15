@@ -1,0 +1,29 @@
+{
+  "name": "toy-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "33.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sacultang/Toy-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sacultang/Toy-Project/issues"
+  },
+  "homepage": "https://github.com/sacultang/Toy-Project#readme",
+  "devDependencies": {
+    "lodash": "^4.17.21",
+    "parcel-bundler": "^1.12.5"
+  },
+  "type": "module",
+  "browserslist": [
+    "since 2017-06"
+  ]
+}
