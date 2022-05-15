@@ -19,11 +19,14 @@
   },
   "homepage": "https://github.com/sacultang/Toy-Project#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-runtime": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
     "parcel-bundler": "^1.12.5"
   },
-  "type": "module",
   "browserslist": [
-    "since 2017-06"
+    "> 1%",
+    "last 2 versions"
   ],
   "dependencies": {
     "lodash": "^4.17.21"

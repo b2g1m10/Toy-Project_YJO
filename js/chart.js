@@ -1,4 +1,4 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 // Featch Data
 const url =
   'https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4b41cea6-0a74-4f33-86b8-718f24260cc3/data.json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220515%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220515T184308Z&X-Amz-Expires=86400&X-Amz-Signature=863b77cd5c7a0c2d121d49479f1a129ac2677cabfbc56c088a1b2bfb0282291c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22data.json%22&x-id=GetObject';
@@ -11,17 +11,17 @@ const getData = async () => {
 };
 
 // GroupBy 모듈
-const groupBy = (data, key) => {
-  return data.reduce((carry, el) => {
-    let group = el[key];
-    if (carry[group] === undefined) {
-      carry[group] = [];
-    }
-    carry[group].push(el);
+// const groupBy = (data, key) => {
+//   return data.reduce((carry, el) => {
+//     let group = el[key];
+//     if (carry[group] === undefined) {
+//       carry[group] = [];
+//     }
+//     carry[group].push(el);
 
-    return carry;
-  }, {});
-};
+//     return carry;
+//   }, {});
+// };
 
 //총 합 구하기 out일 경우에만 더하기
 const amount = (list) => {
@@ -49,8 +49,8 @@ let dailyValues = [];
 
 const dailyArrData = (data) => {
   // 일별로 데이터 분류
-  const dateArr = groupBy(data, 'date');
-  // const dateArr = _.groupBy(data, 'date');
+  // const dateArr = groupBy(data, 'date');
+  const dateArr = _.groupBy(data, 'date');
 
   // 날짜를 기준으로 나머지 데이터 묶음
   for (const [dateText, dailyList] of Object.entries(dateArr)) {
@@ -112,8 +112,8 @@ const monthArrData = (data) => {
   });
 
   // 4월 데이터를 타입으로 분류
-  const aprilTypeArr = groupBy(aprilData, 'type');
-  // const aprilTypeArr = _.groupBy(aprilData, 'type');
+  // const aprilTypeArr = groupBy(aprilData, 'type');
+  const aprilTypeArr = _.groupBy(aprilData, 'type');
 
   // 타입을 기준으로 나머지 묶음
   for (const [typeText, typeValue] of Object.entries(aprilTypeArr)) {
