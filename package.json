@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/sacultang/Toy-Project#readme",
   "devDependencies": {
-    "lodash": "^4.17.21",
     "parcel-bundler": "^1.12.5"
   },
   "type": "module",
   "browserslist": [
     "since 2017-06"
-  ]
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
