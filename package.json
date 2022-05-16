@@ -5,7 +5,7 @@
   "main": "33.js",
   "scripts": {
     "dev": "parcel index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "@babel/core": "^7.17.10",
     "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.4"
   },
   "browserslist": [
     "> 1%",
@@ -30,5 +30,8 @@
   ],
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "staticFiles": {
+    "staticPath": "static"
   }
 }

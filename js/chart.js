@@ -12,14 +12,14 @@ const getData = async () => {
 
 // GroupBy 모듈
 // const groupBy = (data, key) => {
-//   return data.reduce((carry, el) => {
-//     let group = el[key];
-//     if (carry[group] === undefined) {
-//       carry[group] = [];
-//     }
-//     carry[group].push(el);
+//   return data.reduce((acc, el) => {
+//     // 초기값 {}
+//     // console.log(el); // data 안에 있는 각각의 객체들
+//     acc[el[key]] = acc[el[key]] || [];
+//     console.log(acc[el[key]]);
+//     acc[el[key]].push(el);
 
-//     return carry;
+//     return acc;
 //   }, {});
 // };
 
