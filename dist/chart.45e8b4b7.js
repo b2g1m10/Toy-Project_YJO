@@ -20415,7 +20415,7 @@ var monthArrData = function monthArrData(data) {
     monthUl.appendChild(monthLi);
     typeValue.forEach(function (e) {
       if (e.inOut !== 'in') {
-        monthLi.innerHTML = "\n          <img src=\"../images/month-".concat(typeText, ".svg\" alt=\"").concat(typeText, "\" class=\"icon\"/>\n          <h3 class=\"title\">").concat(typeText, "</h3>\n          <h3 class=\"price\">").concat(totalPrice.toLocaleString(), "\uC6D0</h3>\n        ");
+        monthLi.innerHTML = "\n          <img src=\"./images/month-".concat(typeText, ".svg\" alt=\"").concat(typeText, "\" class=\"icon\"/>\n          <h3 class=\"title\">").concat(typeText, "</h3>\n          <h3 class=\"price\">").concat(totalPrice.toLocaleString(), "\uC6D0</h3>\n        ");
       }
     });
   };
@@ -20525,7 +20525,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63426" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54773" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

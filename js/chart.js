@@ -134,7 +134,7 @@ const monthArrData = (data) => {
     typeValue.forEach((e) => {
       if (e.inOut !== 'in') {
         monthLi.innerHTML = `
-          <img src="../images/month-${typeText}.svg" alt="${typeText}" class="icon"/>
+          <img src="./images/month-${typeText}.svg" alt="${typeText}" class="icon"/>
           <h3 class="title">${typeText}</h3>
           <h3 class="price">${totalPrice.toLocaleString()}원</h3>
         `;
